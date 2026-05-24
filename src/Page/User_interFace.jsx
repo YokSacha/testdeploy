@@ -1,9 +1,57 @@
-import { useLoaderData } from "react-router-dom";
-import { Search, ArrowRight, ChevronRight } from "lucide-react";
+import { Search, ArrowRight, ChevronRight, LogIn } from "lucide-react";
+import { useKinetix } from "../context/KinetixContext";
+import { Link } from "react-router-dom";
 
 export default function User_interFace() {
-  const { user, cardStats, rentItems, historyItems, quickFilters, menuItems } =
-    useLoaderData();
+  const { user, rentals, returnItem } = useKinetix();
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#080809] text-white flex flex-col items-center justify-center p-6 text-center">
+        <LogIn size={64} className="text-[#C3FF51] mb-6" />
+        <h1 className="text-3xl font-bold mb-4">กรุณาเข้าสู่ระบบ</h1>
+        <p className="text-[#8f94a5] mb-8 max-w-md">
+          คุณต้องเข้าสู่ระบบเพื่อเข้าถึง Dashboard และจัดการรายการเช่าของคุณ
+        </p>
+        <Link to="/" className="rounded-3xl bg-[#C3FF51] text-black px-8 py-4 font-bold hover:bg-[#D3FE51] transition">
+          กลับไปหน้าแรกเพื่อ Login
+        </Link>
+      </div>
+    );
+  }
+
+  // Derived data
+  const activeRentals = rentals.filter(r => r.status === "กำลังเช่า");
+  const historyItems = rentals; // Show all in history
+
+  const cardStats = [
+    {
+      label: "ยอดคงเหลือ",
+      value: "฿7,840",
+      note: "+12% จากเดือนก่อน",
+      accent: true,
+    },
+    { label: "รายการเช่า", value: activeRentals.length.toString(), note: "กำลังใช้งาน" },
+    { label: "ยอดเช่ารวม", value: rentals.length.toString(), note: "จำนวนคู่ทั้งหมด" },
+    {
+      label: "กำไรสะสม",
+      value: "฿4,956",
+      note: "จากการปล่อยเช่า",
+      accent: true,
+    },
+  ];
+
+  const quickFilters = ["All", "Nike", "Adidas", "ASICS", "Hoka", "Brooks"];
+  const menuItems = [
+    "ภาพรวม",
+    "การแจ้งเตือน",
+    "ประวัติการเช่า",
+    "นัดรับ-ส่ง",
+    "บัญชี",
+    "ข้อมูลส่วนตัว",
+    "ความปลอดภัย",
+    "การชำระเงิน",
+  ];
 
   return (
     <>
@@ -38,7 +86,7 @@ export default function User_interFace() {
                   <div className="rounded-3xl border border-[#1f2937] bg-[#090a0d] p-4">
                     <p className="text-[14px] text-[#8f94a5]">เช่าแล้ว</p>
                     <p className="mt-2 text-2xl font-bold text-white">
-                      {user.rented}
+                      {rentals.length}
                     </p>
                   </div>
                   <div className="rounded-3xl border border-[#1f2937] bg-[#090a0d] p-4">
@@ -127,32 +175,43 @@ export default function User_interFace() {
                 </div>
 
                 <div className="mt-6 space-y-4">
-                  {rentItems.map((item) => (
-                    <div
-                      key={item.name}
-                      className="flex flex-col gap-3 rounded-[28px] border border-[#1f2937] bg-[#080809] p-5 sm:flex-row sm:items-center sm:justify-between"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#0c0d12] text-[13px] font-bold text-[#C3FF51]">
-                          {item.name.split(" ")[0][0]}
+                  {activeRentals.length > 0 ? (
+                    activeRentals.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex flex-col gap-3 rounded-[28px] border border-[#1f2937] bg-[#080809] p-5 sm:flex-row sm:items-center sm:justify-between"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#0c0d12] text-2xl font-bold text-[#C3FF51]">
+                            {item.image}
+                          </div>
+                          <div>
+                            <p className="text-[16px] font-semibold text-white">
+                              {item.name}
+                            </p>
+                            <p className="text-[13px] text-[#8f94a5]">
+                              {item.brand} - {item.rentDate}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-[16px] font-semibold text-white">
-                            {item.name}
-                          </p>
-                          <p className="text-[13px] text-[#8f94a5]">
-                            {item.subtitle}
-                          </p>
+                        <div className="flex items-center gap-3">
+                          <div className="inline-flex items-center gap-3 rounded-3xl border border-[#1f2937] bg-[#090a0d] px-4 py-3 text-[13px] font-semibold text-[#C3FF51]">
+                            <span>฿{item.price}{item.period}</span>
+                          </div>
+                          <button 
+                            onClick={() => returnItem(item.id)}
+                            className="rounded-3xl bg-white/10 hover:bg-white/20 px-4 py-3 text-[12px] font-bold text-white transition"
+                          >
+                            คืนรองเท้า
+                          </button>
                         </div>
                       </div>
-                      <div className="inline-flex items-center gap-3 rounded-3xl border border-[#1f2937] bg-[#090a0d] px-4 py-3 text-[13px] font-semibold text-[#C3FF51]">
-                        <span>{item.price}</span>
-                        <span className="rounded-full bg-[#0b0c10] px-3 py-1 text-[11px] text-[#8f94a5]">
-                          เช่า
-                        </span>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-12 border border-dashed border-[#1f2937] rounded-3xl">
+                      <p className="text-[#8f94a5]">ไม่มีรายการเช่าในขณะนี้</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </section>
 
@@ -194,30 +253,34 @@ export default function User_interFace() {
                 </div>
 
                 <div className="mt-6 space-y-4">
-                  {historyItems.map((item) => (
-                    <div
-                      key={`${item.name}-${item.status}`}
-                      className="flex items-center justify-between rounded-[28px] border border-[#1f2937] bg-[#080809] p-5"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-[#0c0d12] text-[14px] font-bold text-[#C3FF51]">
-                          {item.name[0]}
+                  {historyItems.length > 0 ? (
+                    historyItems.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-between rounded-[28px] border border-[#1f2937] bg-[#080809] p-5"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-[#0c0d12] text-xl font-bold text-[#C3FF51]">
+                            {item.image}
+                          </div>
+                          <div>
+                            <p className="text-[15px] font-semibold text-white">
+                              {item.name}
+                            </p>
+                            <p className={`text-[12px] ${item.status === 'คืนแล้ว' ? 'text-gray-500' : 'text-[#C3FF51]'}`}>
+                              {item.status}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-[15px] font-semibold text-white">
-                            {item.name}
-                          </p>
-                          <p className="text-[12px] text-[#8f94a5]">
-                            {item.badge}
-                          </p>
+                        <div className="inline-flex items-center gap-3 text-[13px] text-white">
+                          <span className="font-bold">฿{item.price}</span>
+                          <ArrowRight size={16} className="text-[#8f94a5]" />
                         </div>
                       </div>
-                      <div className="inline-flex items-center gap-3 text-[13px] text-white">
-                        <span className="font-bold">{item.status}</span>
-                        <ArrowRight size={16} className="text-[#8f94a5]" />
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-[#8f94a5]">ไม่มีประวัติการเช่า</div>
+                  )}
                 </div>
               </section>
             </main>

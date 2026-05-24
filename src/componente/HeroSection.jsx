@@ -51,3 +51,111 @@ export default function HeroSection() {
     </section>
   );
 }
+
+// export default function SectionHero() {
+//   const ball = document.getElementById("cursor-ball");
+
+//   let mouseX = window.innerWidth / 2;
+//   let mouseY = window.innerHeight / 2;
+//   let ballX = mouseX;
+//   let ballY = mouseY;
+//   let velX = 0;
+//   let velY = 0;
+
+//   const stiffness = 0.12;
+//   const damping = 0.75;
+
+//   document.addEventListener("mousemove", (e) => {
+//     mouseX = e.clientX;
+//     mouseY = e.clientY;
+//   });
+
+//   function animate() {
+//     const dx = mouseX - ballX;
+//     const dy = mouseY - ballY;
+
+//     velX = velX * damping + dx * stiffness;
+//     velY = velY * damping + dy * stiffness;
+
+//     ballX += velX;
+//     ballY += velY;
+
+//     ball.style.transform = `translate(${ballX}px, ${ballY}px)`;
+
+//     requestAnimationFrame(animate);
+//   }
+
+//   animate();
+//   return (
+//     <>
+//       <section class="hero">
+//         {/* Left Content  */}
+//         <div class="hero-left">
+//           <span class="tag-line">รองเท้าวิ่งให้เช่า หลายแบรนด์ชั้นนำ</span>
+
+//           <h1 class="hero-title">
+//             <span class="title-line-1">วิ่ง</span>
+//             <span class="title-line-2">ทุก</span>
+//             <span class="title-line-3">ระดับ</span>
+//           </h1>
+
+//           <p class="hero-desc">
+//             ไม่ต้องซื้อ แต่เช่า — รองเท้าวิ่งจากแบรนด์ระดับโลกพร้อมให้คุณ
+//             <br />
+//             สวมใส่ เลือกไซส์ จองออนไลน์ รับหน้าร้านหรือจัดส่งถึงบ้าน
+//           </p>
+
+//           <div class="hero-actions">
+//             <button class="btn-primary">
+//               เลือกรองเท้า :arrow_upper_right:
+//             </button>
+//             <button class="btn-secondary">▷ ดูวิธีเช่า</button>
+//           </div>
+
+//           <div class="hero-stats">
+//             <div class="stat-item">
+//               <span class="stat-value">200+</span>
+//               <span class="stat-label">รุ่นรองเท้า</span>
+//             </div>
+//             <div class="stat-item">
+//               <span class="stat-value">12</span>
+//               <span class="stat-label">แบรนด์ชั้นนำ</span>
+//             </div>
+//             <div class="stat-item">
+//               <span class="stat-value">฿99</span>
+//               <span class="stat-label">เริ่มต้น/วัน</span>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Right Content  */}
+//         <div class="hero-right">
+//           {/* Brand badge  */}
+//           <div class="brand-badge">
+//             <div class="brand-badge-label">แบรนด์</div>
+//             <div class="brand-badge-names">Nike · Adidas · ASICS</div>
+//           </div>
+
+//           {/* Shoe with circle  */}
+//           <div class="shoe-circle">
+//             <img
+//               class="shoe-img"
+//               src="shoe.png"
+//               alt="รองเท้าวิ่ง"
+//               onerror="this.style.display = 'none'"
+//             />
+//           </div>
+
+//           {/* Price badge  */}
+//           <div class="price-badge">
+//             <div class="price-badge-label">ราคาเริ่มต้น</div>
+//             <div class="price-badge-value">฿99 / วัน</div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Mouse-following green ball */}
+//       <div id="cursor-ball"></div>
+//     </>
+//   );
+// }

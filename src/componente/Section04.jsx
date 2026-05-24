@@ -1,34 +1,28 @@
-const products = [
-  {
-    id: 1,
-    name: "Nike Pegasus 41",
-    price: "$20",
-    period: "/วัน",
-    rating: "4.9",
-    reviews: "128",
-    image: "👟",
-  },
-  {
-    id: 2,
-    name: "Adidas Adios Pro",
-    price: "$25",
-    period: "/วัน",
-    rating: "4.8",
-    reviews: "95",
-    image: "👟",
-  },
-  {
-    id: 3,
-    name: "ASICS Superblast",
-    price: "$22",
-    period: "/วัน",
-    rating: "4.7",
-    reviews: "76",
-    image: "👟",
-  },
-];
+import { useKinetix } from "../context/KinetixContext";
+import { productsData } from "../MockData/Mockdata.js";
 
 export default function Section04() {
+  const { addRental, user } = useKinetix();
+
+  const handleRent = (product) => {
+    if (!user) {
+      alert("กรุณาเข้าสู่ระบบก่อนเช่ารองเท้า");
+      return;
+    }
+
+    addRental({
+      name: product.model_name,
+      brand: product.brand,
+      price: product.rental_price["1_day"],
+      period: "/วัน",
+      image: "👟", // In a real app, this would be product.image_url
+    });
+    alert(`เพิ่ม ${product.model_name} ลงในรายการเช่าแล้ว!`);
+  };
+
+  // Taking first 3 products from mock data
+  const featuredProducts = productsData.slice(0, 3);
+
   return (
     <section className="bg-black text-white py-20 lg:py-32 px-6 lg:px-8">
       <div className="mx-auto max-w-[1560px]">
@@ -42,19 +36,27 @@ export default function Section04() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {products.map((product) => (
+          {featuredProducts.map((product, index) => (
             <div
-              key={product.id}
+              key={index}
               className="rounded-[28px] border border-[#1f2937] bg-[#0b0c10] overflow-hidden hover:border-[#C3FF51] transition group"
             >
               {/* Image */}
               <div className="h-64 bg-gradient-to-br from-[#1f2937] to-[#090a0d] flex items-center justify-center text-7xl group-hover:scale-105 transition">
-                {product.image}
+                👟
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-4">{product.name}</h3>
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-[12px] font-bold text-[#C3FF51] uppercase tracking-wider">
+                    {product.brand}
+                  </span>
+                  <span className="text-[12px] text-[#8f94a5]">
+                    {product.category}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-4">{product.model_name}</h3>
 
                 {/* Rating */}
                 <div className="flex items-center gap-2 mb-6">
@@ -66,7 +68,7 @@ export default function Section04() {
                     ))}
                   </div>
                   <span className="text-[13px] text-[#8f94a5]">
-                    ({product.reviews} รีวิว)
+                    (4.9 รีวิว)
                   </span>
                 </div>
 
@@ -74,11 +76,14 @@ export default function Section04() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-3xl font-extrabold text-[#C3FF51]">
-                      {product.price}
+                      ฿{product.rental_price["1_day"]}
                     </p>
-                    <p className="text-[12px] text-[#8f94a5]">{product.period}</p>
+                    <p className="text-[12px] text-[#8f94a5]">/วัน</p>
                   </div>
-                  <button className="rounded-3xl bg-[#C3FF51] text-black px-6 py-3 font-semibold hover:bg-[#D3FE51] transition text-[13px]">
+                  <button
+                    onClick={() => handleRent(product)}
+                    className="rounded-3xl bg-[#C3FF51] text-black px-6 py-3 font-semibold hover:bg-[#D3FE51] transition text-[13px]"
+                  >
                     เช่า
                   </button>
                 </div>

@@ -8,7 +8,7 @@ import {
   Plus,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ export default function ContactUs() {
     email: "",
     phone: "",
     orderId: "",
-    issueType: "",
+    issueType: "เลือกประเภทปัญหา...",
     details: "",
   });
 
@@ -32,66 +32,18 @@ export default function ContactUs() {
     e.preventDefault();
     console.log("Form submitted:", formData);
     // Add your form submission logic here
-    alert("ข้อความของคุณถูกส่งแล้ว!");
+    alert("ข้อความของคุณถูกส่งแล้ว! ทีมงานจะติดต่อกลับโดยเร็วที่สุด");
     setFormData({
       name: "",
       email: "",
       phone: "",
       orderId: "",
-      issueType: "",
+      issueType: "เลือกประเภทปัญหา...",
       details: "",
     });
   };
   return (
     <div className="min-h-screen bg-[#080809] text-white font-sora">
-      {/* NAVBAR */}
-      <nav className="h-[72px] border-b border-[#1f2937] px-8 flex items-center justify-between">
-        {/* LOGO */}
-        <Link to="/" className="text-[22px] font-extrabold tracking-tight">
-          KINETI
-          <span className="text-[#C3FF51]"> X</span>
-        </Link>
-
-        {/* MENU */}
-        <div className="hidden md:flex items-center gap-14 text-[11px] text-[#808090]">
-          <Link to="/rental" className="hover:text-[#C3FF51] duration-200">
-            Rental
-          </Link>
-
-          <Link to="/brand" className="hover:text-[#C3FF51] duration-200">
-            Brand
-          </Link>
-
-          <Link
-            to="/how-it-works"
-            className="hover:text-[#C3FF51] duration-200"
-          >
-            How To
-          </Link>
-
-          <Link to="/contact" className="text-white">
-            Contact
-          </Link>
-        </div>
-
-        {/* BUTTONS */}
-        <div className="flex items-center gap-4">
-          <Link
-            to="/register"
-            className="bg-[#C3FF51] hover:bg-[#D3FE51] duration-200 text-black font-bold text-[12px] px-8 py-3 rounded-xl"
-          >
-            Join Us
-          </Link>
-
-          <Link
-            to="/login"
-            className="bg-[#C3FF51] hover:bg-[#D3FE51] duration-200 text-black font-bold text-[12px] px-8 py-3 rounded-xl"
-          >
-            Login
-          </Link>
-        </div>
-      </nav>
-
       {/* MAIN */}
       <div className="px-6 md:px-10 py-10">
         {/* HERO */}

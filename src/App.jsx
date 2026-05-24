@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Layout from "./componente/Layout";
-import Contact from "./Page/Contact";
+import ContactUs from "./Page/ContactUs";
 import HomePage from "./Page/HomePage";
 import Pricing from "./Page/Pricing";
 import FAQ from "./Page/FAQ";
 import HowItWorks from "./Page/HowItWorks";
 import User_interFace from "./Page/User_interFace";
+import AdminDashboard from "./Page/AdminDashBoard";
 
 const dashboardLoader = async () => {
   return {
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "contact", element: <Contact /> },
+      { path: "contact", element: <ContactUs /> },
       { path: "pricing", element: <Pricing /> },
       { path: "how-it-works", element: <HowItWorks /> },
       { path: "faq", element: <FAQ /> },
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <User_interFace />,
         loader: dashboardLoader,
+      },
+      {
+        path: "admin-dashboard",
+        element: <AdminDashboard />,
       },
     ],
   },
