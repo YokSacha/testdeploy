@@ -177,7 +177,7 @@ export default function HowItWorks() {
       <Navbar active="how-to" />
 
       <section className="border-y border-kinetix-border/80">
-        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-12 lg:py-20">
+        <div className="mx-auto grid max-w-[1440px] items-start gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-12 lg:py-20">
           <div className="flex flex-col justify-center">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-kinetix-lime">
               {copy.eyebrow}
@@ -214,11 +214,11 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          <div className="relative min-h-[420px] overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950">
+          <div className="relative h-[520px] overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950 sm:h-[620px] lg:h-[656px]">
             <img
               src="/how-it-works-shoe.png"
               alt={copy.imageAlt}
-              className="h-full min-h-[420px] w-full object-cover"
+              className="h-full w-full object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/80 px-5 py-4 backdrop-blur-md sm:px-6">
               <div className="grid grid-cols-3 gap-3 text-center">
