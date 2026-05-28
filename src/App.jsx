@@ -1,17 +1,22 @@
 import "./App.css";
-import ButtonMain from "./componente/ButtonMain";
 import HeroButton from "./componente/HeroButton";
-import LoginButton from "./componente/LoginButton";
 import Secondbutton from "./componente/Secondbutton";
 import Section01 from "./componente/Section01";
 import Section_03 from "./componente/Section_03";
 import SignupPage from "./componente/SignupPage";
+import HowItWorks from "./componente/HowItWorks";
+import Navbar from "./componente/Navbar";
 
 function App() {
+  const currentPath = window.location.pathname.replace(/\/$/, "");
+
+  if (currentPath === "/how-it-works") {
+    return <HowItWorks />;
+  }
+
   return (
     <>
-      <ButtonMain />
-      <LoginButton />
+      <Navbar />
       <Section01 />
       <SignupPage />
 

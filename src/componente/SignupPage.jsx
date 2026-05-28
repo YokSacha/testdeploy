@@ -24,6 +24,12 @@ const initialFormData = {
   ageConfirm: false,
 };
 
+function ErrorMsg({ errors, field }) {
+  return errors[field] ? (
+    <p className="text-red-400 text-xs mt-1 ml-1">{errors[field]}</p>
+  ) : null;
+}
+
 export default function SignupPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
@@ -163,12 +169,6 @@ export default function SignupPage() {
     setPreviewData(null);
   };
 
-  // Component แสดง error ใต้ input
-  const ErrorMsg = ({ field }) =>
-    errors[field] ? (
-      <p className="text-red-400 text-xs mt-1 ml-1">{errors[field]}</p>
-    ) : null;
-
   // class สำหรับ input ปกติ vs มี error
   const inputClass = (field) =>
     `w-full bg-black border rounded-xl px-4 py-3 focus:outline-none transition-colors ${
@@ -178,23 +178,7 @@ export default function SignupPage() {
     }`;
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-10 py-6 border-b border-zinc-900">
-        <div className="text-3xl font-bold tracking-wide">
-          KINETI<span className="text-lime-400">X</span>
-        </div>
-        <div className="hidden md:flex items-center gap-16 text-sm text-zinc-400">
-          <a href="#" className="hover:text-lime-400 transition-colors">Rental</a>
-          <a href="#" className="hover:text-lime-400 transition-colors">Brand</a>
-          <a href="#" className="hover:text-lime-400 transition-colors">How to</a>
-          <a href="#" className="hover:text-lime-400 transition-colors">Contact</a>
-        </div>
-        <button className="bg-lime-400 text-black px-8 py-3 rounded-2xl font-semibold hover:scale-105 transition-transform">
-          Login
-        </button>
-      </nav>
-
+    <div id="signup" className="min-h-screen bg-black text-white font-sans">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         {/* Left Content */}
@@ -272,7 +256,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("firstName")}
                       />
-                      <ErrorMsg field="firstName" />
+                      <ErrorMsg errors={errors} field="firstName" />
                     </div>
                     <div>
                       <input
@@ -283,7 +267,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("lastName")}
                       />
-                      <ErrorMsg field="lastName" />
+                      <ErrorMsg errors={errors} field="lastName" />
                     </div>
                   </div>
 
@@ -297,7 +281,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("email")}
                       />
-                      <ErrorMsg field="email" />
+                      <ErrorMsg errors={errors} field="email" />
                     </div>
                     <div>
                       <input
@@ -308,7 +292,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("phone")}
                       />
-                      <ErrorMsg field="phone" />
+                      <ErrorMsg errors={errors} field="phone" />
                     </div>
                     <div>
                       <textarea
@@ -319,7 +303,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={`${inputClass("address")} resize-none`}
                       />
-                      <ErrorMsg field="address" />
+                      <ErrorMsg errors={errors} field="address" />
                     </div>
                     <div>
                       <input
@@ -330,7 +314,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("shoeSize")}
                       />
-                      <ErrorMsg field="shoeSize" />
+                      <ErrorMsg errors={errors} field="shoeSize" />
                     </div>
                   </div>
                 </div>
@@ -350,7 +334,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("bankName")}
                       />
-                      <ErrorMsg field="bankName" />
+                      <ErrorMsg errors={errors} field="bankName" />
                     </div>
                     <div>
                       <input
@@ -361,7 +345,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("accountNumber")}
                       />
-                      <ErrorMsg field="accountNumber" />
+                      <ErrorMsg errors={errors} field="accountNumber" />
                     </div>
                     <div>
                       <input
@@ -372,7 +356,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("accountName")}
                       />
-                      <ErrorMsg field="accountName" />
+                      <ErrorMsg errors={errors} field="accountName" />
                     </div>
                   </div>
                 </div>
@@ -392,7 +376,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("password")}
                       />
-                      <ErrorMsg field="password" />
+                      <ErrorMsg errors={errors} field="password" />
                     </div>
                     <div>
                       <input
@@ -403,7 +387,7 @@ export default function SignupPage() {
                         onChange={handleChange}
                         className={inputClass("confirmPassword")}
                       />
-                      <ErrorMsg field="confirmPassword" />
+                      <ErrorMsg errors={errors} field="confirmPassword" />
                     </div>
                   </div>
                 </div>
@@ -421,7 +405,7 @@ export default function SignupPage() {
                       />
                       <span>I agree to the Terms of Service and Privacy Policy.</span>
                     </label>
-                    <ErrorMsg field="agreeTerms" />
+                    <ErrorMsg errors={errors} field="agreeTerms" />
                   </div>
                   <div>
                     <label className="flex items-start gap-3 cursor-pointer">
@@ -434,7 +418,7 @@ export default function SignupPage() {
                       />
                       <span>I confirm that I am over 20 years old.</span>
                     </label>
-                    <ErrorMsg field="ageConfirm" />
+                    <ErrorMsg errors={errors} field="ageConfirm" />
                   </div>
                 </div>
 
