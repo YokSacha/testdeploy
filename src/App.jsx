@@ -6,8 +6,9 @@ import Section_03 from "./componente/Section_03";
 import SignupPage from "./componente/SignupPage";
 import HowItWorks from "./componente/HowItWorks";
 import Navbar from "./componente/Navbar";
+import { LanguageProvider } from "./context/LanguageProvider";
 
-function App() {
+function AppContent() {
   const currentPath = window.location.pathname.replace(/\/$/, "");
 
   if (currentPath === "/how-it-works") {
@@ -26,6 +27,14 @@ function App() {
         <Section_03 />
       </div>
     </>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 
