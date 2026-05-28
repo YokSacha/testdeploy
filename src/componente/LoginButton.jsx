@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function ButtonMain() {
+function LoginButton() {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
 
   const getStyle = () => {
     if (pressed) return {
-      background: "#E8E8E8",
+      background: "black",
       border: "2.5px solid #00FF99",
       color: "#00FF99",
     };
@@ -24,16 +24,16 @@ function ButtonMain() {
 
   return (
     <button
-      style={getStyle()}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-      className="px-12 py-3.5 rounded-[999px] text-[16px] font-bold transition-all duration-150"
+        style={getStyle()}
+        onMouseLeave={() => { setHovered(false); setPressed(false); }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseDown={() => setPressed(true)}
+        onMouseUp={() => setPressed(false)}
+        className="px-19 py-3.5 rounded-xl text-[16px] font-bold transition-all duration-150"
     >
-      Button
+      Login
     </button>
   );
 }
 
-export default ButtonMain;
+export default LoginButton;
