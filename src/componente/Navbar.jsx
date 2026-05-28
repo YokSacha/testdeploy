@@ -28,7 +28,10 @@ export default function Navbar({ active = "" }) {
     { label: copy.howTo, href: "/how-it-works", key: "how-to" },
     { label: copy.contact, href: "/#contact", key: "contact" },
   ];
-  const languageOptions = ["en", "th"];
+  const languagePillClass = (option) =>
+    `flex h-8 w-10 items-center justify-center rounded-[10px] transition-colors ${
+      language === option ? "bg-kinetix-lime text-black" : "text-zinc-500"
+    }`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black">
@@ -62,18 +65,8 @@ export default function Navbar({ active = "" }) {
             aria-label={copy.switchLabel}
             className="inline-flex h-10 items-center rounded-[14px] border border-white/15 bg-white/[0.04] p-1 text-[12px] font-bold leading-none text-white transition-colors hover:border-kinetix-lime/70"
           >
-            {languageOptions.map((option) => (
-              <span
-                key={option}
-                className={`flex h-8 w-10 items-center justify-center rounded-[10px] transition-colors ${
-                  language === option
-                    ? "bg-kinetix-lime text-black"
-                    : "text-zinc-500"
-                }`}
-              >
-                {option.toUpperCase()}
-              </span>
-            ))}
+            <span className={languagePillClass("en")}>EN</span>
+            <span className={languagePillClass("th")}>TH</span>
           </button>
 
           <a
