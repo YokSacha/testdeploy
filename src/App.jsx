@@ -1,3 +1,4 @@
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Layout from "./componente/Layout";
@@ -62,6 +63,7 @@ const dashboardLoader = async () => {
     ],
   };
 };
+
 
 
 const router = createBrowserRouter([

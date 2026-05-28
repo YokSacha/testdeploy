@@ -1,3 +1,4 @@
+
 const steps = [
   {
     number: "01",
@@ -66,6 +67,4 @@ export default function Section01() {
     </section>
   );
 }
-
-
 
