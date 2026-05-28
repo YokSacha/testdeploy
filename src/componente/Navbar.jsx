@@ -28,6 +28,7 @@ export default function Navbar({ active = "" }) {
     { label: copy.howTo, href: "/how-it-works", key: "how-to" },
     { label: copy.contact, href: "/#contact", key: "contact" },
   ];
+  const languageOptions = ["en", "th"];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black">
@@ -40,7 +41,7 @@ export default function Navbar({ active = "" }) {
           KINETI<span className="text-kinetix-lime">X</span>
         </a>
 
-        <div className="hidden items-center gap-14 text-[13px] font-medium text-zinc-300 md:flex lg:gap-16">
+        <div className="hidden items-center gap-14 text-[13px] font-medium leading-none text-zinc-300 md:flex lg:gap-16">
           {links.map((link) => (
             <a
               key={link.key}
@@ -59,27 +60,25 @@ export default function Navbar({ active = "" }) {
             type="button"
             onClick={toggleLanguage}
             aria-label={copy.switchLabel}
-            className="inline-flex h-10 items-center rounded-[14px] border border-white/15 bg-white/[0.04] p-1 text-[12px] font-bold text-white transition-colors hover:border-kinetix-lime/70"
+            className="inline-flex h-10 items-center rounded-[14px] border border-white/15 bg-white/[0.04] p-1 text-[12px] font-bold leading-none text-white transition-colors hover:border-kinetix-lime/70"
           >
-            <span
-              className={`flex h-8 min-w-9 items-center justify-center rounded-[10px] px-2 transition-colors ${
-                language === "th" ? "bg-kinetix-lime text-black" : "text-zinc-500"
-              }`}
-            >
-              TH
-            </span>
-            <span
-              className={`flex h-8 min-w-9 items-center justify-center rounded-[10px] px-2 transition-colors ${
-                language === "en" ? "bg-kinetix-lime text-black" : "text-zinc-500"
-              }`}
-            >
-              EN
-            </span>
+            {languageOptions.map((option) => (
+              <span
+                key={option}
+                className={`flex h-8 w-10 items-center justify-center rounded-[10px] transition-colors ${
+                  language === option
+                    ? "bg-kinetix-lime text-black"
+                    : "text-zinc-500"
+                }`}
+              >
+                {option.toUpperCase()}
+              </span>
+            ))}
           </button>
 
           <a
             href="/#signup"
-            className="hidden h-12 min-w-[106px] items-center justify-center rounded-[16px] bg-kinetix-lime px-7 text-[15px] font-bold text-black transition-all hover:bg-gradient-to-r hover:from-[#00ff41] hover:to-kinetix-aqua sm:inline-flex"
+            className="hidden h-12 w-[128px] items-center justify-center rounded-[16px] bg-kinetix-lime px-4 text-center text-[15px] font-bold leading-none text-black transition-all hover:bg-gradient-to-r hover:from-[#00ff41] hover:to-kinetix-aqua sm:inline-flex"
           >
             {copy.login}
           </a>
