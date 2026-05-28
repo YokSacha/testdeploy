@@ -5,7 +5,7 @@ function Section01() {
     return(
         <>
             {/* <!-- Section 01 --> */}
-            <section className= "flex flex-col ">
+            <section id="brand" className= "flex flex-col ">
                 
                 {/* <!-- Nav Bar เคลื่อนที่--> */}
                 <div className="marquee-strip">
