@@ -111,7 +111,12 @@ const FOOTER_LINKS = {
   ABOUT: ["About Us", "Our Technology", "Sustainability", "Careers", "Blog"],
 };
 
-const NAV_LINKS = ["MEN", "WOMEN", "KIDS", "BRANDS", "COLLECTIONS", "SALE"];
+const NAV_LINKS = [
+  { label: "Catalog", href: "#catalog" },
+  { label: "How it works", href: "/#features" },
+  { label: "Community", href: "/#community" },
+  { label: "Reviews", href: "/#reviews" },
+];
 
 // ── Product Card ──────────────────────────────────────────────────────────────
 
@@ -204,7 +209,7 @@ export default function Catalog() {
       {/* ── Main Navbar ───────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 bg-[#080809]/95 backdrop-blur-md border-b border-[#1e1e20]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="flex items-center gap-6 h-14">
+          <div className="relative flex items-center h-14">
             {/* Logo */}
             <Link to="/" className="shrink-0">
               <span className="text-[24px] font-extrabold tracking-widest text-white">
@@ -213,14 +218,14 @@ export default function Catalog() {
             </Link>
 
             {/* Nav links */}
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
               {NAV_LINKS.map((link) => (
                 <a
-                  key={link}
-                  href="#"
-                  className="text-[11px] font-semibold text-white/55 hover:text-white transition-colors tracking-wider"
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-white/60 hover:text-neon transition-colors duration-200"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </nav>

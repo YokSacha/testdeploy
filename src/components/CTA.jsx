@@ -2,7 +2,7 @@ import Button from "./ui/Button";
 
 export default function CTA() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden">
+    <section className="py-16 lg:py-20 relative overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"

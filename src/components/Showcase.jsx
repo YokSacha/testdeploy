@@ -12,6 +12,7 @@ const SHOES = [
     badge: 'Most popular',
     badgeColor: 'neon',
     desc: 'Carbon-plate race day rocket. Best for marathon & tempo.',
+    image: '/shoes/1.webp',
   },
   {
     id: 2,
@@ -73,17 +74,24 @@ function ShoeCard({ shoe }) {
             {shoe.badge}
           </span>
         )}
-        {/* Replace with <img src={`/shoes/${shoe.id}.png`} alt={shoe.name} className="object-contain w-full h-full p-6" /> */}
-        <div className="flex flex-col items-center gap-2 text-center px-6">
-          <div className="w-14 h-14 rounded-full bg-neon/8 border border-neon/15 flex items-center justify-center">
-            <svg className="w-7 h-7 text-neon/50" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
+        {shoe.image ? (
+          <img
+            src={shoe.image}
+            alt={shoe.name}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className="flex flex-col items-center gap-2 text-center px-6">
+            <div className="w-14 h-14 rounded-full bg-neon/8 border border-neon/15 flex items-center justify-center">
+              <svg className="w-7 h-7 text-neon/50" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <p className="text-white/20 text-xs">
+              <code className="text-neon/40">public/shoes/{shoe.id}.png</code>
+            </p>
           </div>
-          <p className="text-white/20 text-xs">
-            <code className="text-neon/40">public/shoes/{shoe.id}.png</code>
-          </p>
-        </div>
+        )}
         <span className="absolute bottom-3 right-3 bg-dark-card/80 backdrop-blur-sm border border-dark-border rounded-lg px-2.5 py-1 text-xs font-semibold text-white">
           {shoe.category}
         </span>
@@ -119,7 +127,7 @@ export default function Showcase() {
       : SHOES.filter((s) => s.category === activeCategory)
 
   return (
-    <section id="catalog" className="py-24 lg:py-32 bg-dark-card/30">
+    <section id="catalog" className="py-16 lg:py-20 bg-dark-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
@@ -154,10 +162,17 @@ export default function Showcase() {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((shoe) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {filtered.slice(0, 4).map((shoe) => (
             <ShoeCard key={shoe.id} shoe={shoe} />
           ))}
+        </div>
+
+        {/* View all */}
+        <div className="flex justify-center mt-8">
+          <Button variant="outline" size="md" to="/catalog">
+            View all shoes →
+          </Button>
         </div>
 
         {/* Community UGC strip */}
@@ -174,24 +189,25 @@ export default function Showcase() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {['@junnee_jun', '@puntantav', '@kiekleee', '@runwithbkk'].map((handle, i) => (
+            {[
+              { handle: '@junnee_jun',  img: '/community/junnee_jun.avif' },
+              { handle: '@puntantav',   img: '/community/puntantav.avif' },
+              { handle: '@kiekleee',    img: '/community/kiekleee.avif' },
+              { handle: '@runwithbkk', img: '/community/runwithbkk.avif' },
+            ].map(({ handle, img }) => (
               <div
                 key={handle}
-                className="group relative rounded-2xl bg-dark-elevated border border-dark-border aspect-square overflow-hidden flex items-end p-3 cursor-pointer hover:border-neon/20 transition-all duration-300"
+                className="group relative rounded-2xl bg-dark-elevated border border-dark-border aspect-[3/4] overflow-hidden flex items-end p-3 cursor-pointer hover:border-neon/20 transition-all duration-300"
               >
-                {/* Placeholder bg */}
-                <div
-                  className="absolute inset-0 opacity-20 transition-opacity duration-300 group-hover:opacity-30"
-                  style={{
-                    background: `radial-gradient(circle at ${30 + i * 15}% ${40 + i * 12}%, rgba(195,255,81,0.3), transparent 60%)`,
-                  }}
+                {/* Real photo */}
+                <img
+                  src={img}
+                  alt={handle}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white/10" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-                  </svg>
-                </div>
-                <span className="relative text-white/60 text-xs font-medium">{handle}</span>
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <span className="relative text-white/90 text-xs font-medium drop-shadow">{handle}</span>
                 {/* + overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">

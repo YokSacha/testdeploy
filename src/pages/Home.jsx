@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import Features from '../components/Features'
 import Showcase from '../components/Showcase'
 import Pricing from '../components/Pricing'
+import Reviews from '../components/Reviews'
 import FAQ from '../components/FAQ'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
@@ -16,6 +17,7 @@ export default function Home() {
         <Features />
         <Showcase />
         <Pricing />
+        <Reviews />
         <FAQ />
         <CTA />
       </main>

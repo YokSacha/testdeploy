@@ -54,7 +54,7 @@ const PLANS = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-24 lg:py-32">
+    <section id="pricing" className="py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
@@ -62,7 +62,7 @@ export default function Pricing() {
             Pricing
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-            Simple, honest blocks
+            Simple, honest pricing
           </h2>
           <p className="mt-4 text-white/50 max-w-md mx-auto text-base sm:text-lg">
             No memberships. No surprise fees. Pay for exactly what you need.

@@ -4,7 +4,7 @@ import vaporfly3 from "../../images/Nike Vaporfly 3.webp";
 const STATS = [
   { value: "120+", label: "Premium models" },
   { value: "4.9★", label: "Avg. rating" },
-  { value: "48h", label: "Min. block" },
+  { value: "48h", label: "Shortest rental" },
   { value: "12k+", label: "Happy runners" },
 ];
 
@@ -115,7 +115,7 @@ export default function Hero() {
                 <img
                   src={vaporfly3}
                   alt="Nike Vaporfly 3"
-                  className="w-full h-full object-contain p-6"
+                  className="w-full h-full object-cover"
                 />
 
                 {/* Neon corner accents */}

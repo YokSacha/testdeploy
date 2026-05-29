@@ -68,7 +68,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="py-24 lg:py-32 bg-dark-card/20">
+    <section id="faq" className="py-16 lg:py-20 bg-dark-card/20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
