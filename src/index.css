@@ -5,6 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 72px;
   }
 
   body {
@@ -33,6 +34,16 @@
     opacity: 0;
     animation: fadeUp 0.7s ease-out forwards;
   }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  will-change: transform;
 }
 
 /* Hide scrollbar for spotlight horizontal scroll */

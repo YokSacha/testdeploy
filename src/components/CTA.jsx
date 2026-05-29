@@ -2,7 +2,7 @@ import Button from "./ui/Button";
 
 export default function CTA() {
   return (
-    <section className="py-16 lg:py-20 relative overflow-hidden">
+    <section className="py-10 lg:py-12 relative overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -53,28 +53,8 @@ export default function CTA() {
               />
             </svg>
           </Button>
-          <Button variant="outline" size="lg" href="#features">
-            See how it works
-          </Button>
         </div>
 
-        {/* Social proof */}
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-white/35">
-          <span className="flex items-center gap-2">
-            <svg
-              className="w-4 h-4 text-neon/60"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-            </svg>
-            4.9 / 5 average rating
-          </span>
-          <span className="hidden sm:block w-px h-4 bg-dark-border" />
-          <span>12,000+ happy runners</span>
-          <span className="hidden sm:block w-px h-4 bg-dark-border" />
-          <span>No subscription needed</span>
-        </div>
       </div>
     </section>
   );

@@ -6,8 +6,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Try before you buy',
-    description:
-      'Test run the latest models during a real workout. Only pay for the pair you love.',
+    description: 'Test the latest models in a real workout. Pay only for the pair you love.',
   },
   {
     icon: (
@@ -16,8 +15,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Always fresh pairs',
-    description:
-      'Every rental is professionally cleaned and inspected. You get near-new condition every time.',
+    description: 'Cleaned and inspected between every rental. Near-new condition, every time.',
   },
   {
     icon: (
@@ -25,9 +23,8 @@ const FEATURES = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5" />
       </svg>
     ),
-    title: 'Flexible blocks',
-    description:
-      'Rent by the block — 48 hours, a week, or a full month. No subscriptions or surprise fees.',
+    title: 'Flexible rentals',
+    description: '1 day, 3 days, or a full week. Choose the plan that fits your training.',
   },
   {
     icon: (
@@ -36,9 +33,8 @@ const FEATURES = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
       </svg>
     ),
-    title: 'Convenient pick-up',
-    description:
-      'Pick up and return at partner locations across Bangkok — no shipping required.',
+    title: 'We will deliver it to you',
+    description: 'Delivered straight to your door. No pick-up or travel required.',
   },
   {
     icon: (
@@ -47,8 +43,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Damage protection',
-    description:
-      'Normal wear is covered. Rent with confidence knowing you are protected from unexpected costs.',
+    description: 'Normal wear is fully covered. Rent with confidence, no unexpected costs.',
   },
   {
     icon: (
@@ -57,24 +52,16 @@ const FEATURES = [
       </svg>
     ),
     title: 'Performance data',
-    description:
-      'Get personalized insights after each rental to find the shoe that truly matches your gait.',
+    description: 'Personalized insights after each rental to find the shoe that fits your gait.',
   },
 ]
 
-const STEPS = [
-  { num: '01', label: 'Choose your shoe', desc: 'Browse 120+ models and reserve your block.' },
-  { num: '02', label: 'Pick it up', desc: 'Grab the pair from your nearest partner location.' },
-  { num: '03', label: 'Run & test', desc: 'Put the shoes through real training sessions.' },
-  { num: '04', label: 'Return or buy', desc: 'Love them? Buy at a discount. Not for you? Return.' },
-]
 
 export default function Features() {
   return (
-    <section id="features" className="py-16 lg:py-20">
+    <section id="features" className="py-10 lg:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16 lg:mb-20">
+        <div className="text-center mb-10">
           <span className="text-neon text-xs font-semibold tracking-widest uppercase">
             Why KINETIX
           </span>
@@ -86,12 +73,11 @@ export default function Features() {
           </p>
         </div>
 
-        {/* Feature grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-24">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f) => (
             <div
               key={f.title}
-              className="group bg-dark-card border border-dark-border rounded-2xl p-6 transition-all duration-300 card-glow hover:border-neon/20"
+              className="group bg-dark-card border border-dark-border rounded-2xl px-6 pt-6 pb-4 transition-all duration-300 card-glow hover:border-neon/20"
             >
               <div className="w-11 h-11 rounded-xl bg-neon/10 border border-neon/15 flex items-center justify-center text-neon mb-4 group-hover:bg-neon/15 transition-colors duration-200">
                 {f.icon}
@@ -100,33 +86,6 @@ export default function Features() {
               <p className="text-white/45 text-sm leading-relaxed">{f.description}</p>
             </div>
           ))}
-        </div>
-
-        {/* How it works — steps */}
-        <div className="relative">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">How it works</h2>
-          </div>
-
-          {/* Connector line (desktop) */}
-          <div
-            className="hidden lg:block absolute top-[72px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-neon/25 to-transparent"
-            aria-hidden="true"
-          />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {STEPS.map((step) => (
-              <div key={step.num} className="flex flex-col items-center text-center gap-4">
-                <div className="relative w-14 h-14 rounded-full bg-neon/10 border border-neon/30 flex items-center justify-center">
-                  <span className="text-neon font-bold text-lg">{step.num}</span>
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-base mb-1">{step.label}</p>
-                  <p className="text-white/45 text-sm leading-relaxed">{step.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

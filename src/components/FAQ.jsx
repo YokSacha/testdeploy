@@ -29,10 +29,11 @@ const FAQS = [
 
 function FAQItem({ faq, isOpen, onToggle }) {
   return (
-    <div className="border border-dark-border rounded-xl overflow-hidden transition-colors duration-200 hover:border-neon/20">
+    <div className="border-b border-dark-border transition-colors duration-200 hover:border-neon/20 first:border-t">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+        onMouseEnter={() => { if (!isOpen) onToggle() }}
+        className="w-full flex items-center justify-between gap-4 px-6 py-1.5 text-left"
         aria-expanded={isOpen}
       >
         <span className={`text-sm font-semibold leading-relaxed transition-colors duration-200 ${isOpen ? 'text-neon' : 'text-white'}`}>
@@ -68,9 +69,8 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="py-16 lg:py-20 bg-dark-card/20">
+    <section id="faq" className="pt-10 pb-6 lg:pt-12 lg:pb-8 bg-dark-card/20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12">
           <span className="text-neon text-xs font-semibold tracking-widest uppercase">
             FAQ
@@ -80,8 +80,7 @@ export default function FAQ() {
           </h2>
         </div>
 
-        {/* Items */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col">
           {FAQS.map((faq, i) => (
             <FAQItem
               key={i}

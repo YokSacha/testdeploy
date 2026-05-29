@@ -1,14 +1,59 @@
+import { useState, useEffect, useRef } from "react";
 import Button from "./ui/Button";
-import vaporfly3 from "../../images/Nike Vaporfly 3.webp";
 
 const STATS = [
   { value: "120+", label: "Premium models" },
   { value: "4.9★", label: "Avg. rating" },
-  { value: "48h", label: "Shortest rental" },
+  { value: "24h", label: "24h Delivery" },
   { value: "12k+", label: "Happy runners" },
 ];
 
+const HERO_SHOES = [
+  { name: "Adizero Adios Pro 4", price: "490", video: "/hero/1.webm" },
+  { name: "Adidas Adizero Adios Pro 3", price: "450", video: "/hero/2.webm" },
+  { name: "Adidas Adizero Zero SL", price: "350", video: "/hero/3.webm" },
+  { name: "Nike Vomero Plus", price: "420", video: "/hero/4.mp4" },
+  { name: "Nike Pegasus 42",  price: "290", video: "/hero/5.mp4" },
+];
+
+const N = HERO_SHOES.length;
+const CAROUSEL_INTERVAL = 3500;
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const [outgoing, setOutgoing] = useState(null);
+  const currentRef = useRef(0);
+
+  const advance = () => {
+    const c = currentRef.current;
+    const next = (c + 1) % N;
+    setOutgoing(c);
+    setCurrent(next);
+    currentRef.current = next;
+    setTimeout(() => setOutgoing(null), 520);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(advance, CAROUSEL_INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
+
+  const getStyle = (i) => {
+    const isOut = i === outgoing;
+    const dist = (i - current + N) % N; // 0 = current (top)
+    const zIndex = isOut ? N + 1 : N - dist;
+
+    return {
+      position: "absolute",
+      inset: 0,
+      zIndex,
+      transform: isOut ? "translateX(-115%)" : "translateX(0)",
+      transition: isOut ? "transform 500ms ease-in-out" : "none",
+    };
+  };
+
+  const active = HERO_SHOES[current];
+
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       {/* Background grid */}
@@ -16,8 +61,6 @@ export default function Hero() {
         className="absolute inset-0 bg-grid-dark bg-grid opacity-100 pointer-events-none"
         aria-hidden="true"
       />
-
-      {/* Radial gradient blobs */}
       <div
         className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
         style={{
@@ -36,10 +79,9 @@ export default function Hero() {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
           {/* Left — copy */}
           <div className="flex flex-col gap-6 animate-fade-up">
-            {/* Pill badge */}
             <div className="inline-flex items-center gap-2 bg-neon/10 border border-neon/20 rounded-full px-4 py-1.5 w-fit">
               <span className="w-2 h-2 rounded-full bg-neon animate-pulse" />
               <span className="text-neon text-xs font-semibold tracking-wider uppercase">
@@ -56,8 +98,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-base sm:text-lg text-white/55 max-w-md leading-relaxed">
-              Try the world's best running shoes before you commit. Premium
-              models. Flexible blocks. No subscription required.
+              Try the world's best running shoes. Rent first, buy with confidence.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -97,11 +138,10 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — hero visual */}
-          <div className="relative flex items-center justify-center lg:justify-end">
-            {/* Glow ring */}
+          {/* Right — deck carousel */}
+          <div className="relative flex items-stretch justify-center lg:justify-end min-h-0">
             <div
-              className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full pointer-events-none"
+              className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full pointer-events-none top-1/2 -translate-y-1/2"
               style={{
                 background:
                   "radial-gradient(circle, rgba(195,255,81,0.12) 0%, transparent 65%)",
@@ -109,38 +149,67 @@ export default function Hero() {
               aria-hidden="true"
             />
 
-            {/* Floating shoe placeholder */}
-            <div className="relative animate-float z-10">
-              <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-3xl bg-dark-card border border-dark-border flex items-center justify-center overflow-hidden">
-                <img
-                  src={vaporfly3}
-                  alt="Nike Vaporfly 3"
-                  className="w-full h-full object-cover"
-                />
+            <div className="relative z-10 w-full h-full">
+              {/* Deck */}
+              <div className="relative w-full h-full rounded-3xl overflow-hidden">
+                {HERO_SHOES.map((shoe, i) => (
+                  <div
+                    key={shoe.video}
+                    style={getStyle(i)}
+                    className="rounded-3xl overflow-hidden"
+                  >
+                    <video
+                      src={shoe.video}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
 
-                {/* Neon corner accents */}
-                <span className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-neon/40 rounded-tl-lg" />
-                <span className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-neon/40 rounded-tr-lg" />
-                <span className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-neon/40 rounded-bl-lg" />
-                <span className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-neon/40 rounded-br-lg" />
+              {/* Neon corner accents */}
+              <span className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-neon/40 rounded-tl-lg z-20 pointer-events-none" />
+              <span className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-neon/40 rounded-tr-lg z-20 pointer-events-none" />
+              <span className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-neon/40 rounded-bl-lg z-20 pointer-events-none" />
+              <span className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-neon/40 rounded-br-lg z-20 pointer-events-none" />
+
+              {/* Dot indicators */}
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+                {HERO_SHOES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setOutgoing(current);
+                      setCurrent(i);
+                      currentRef.current = i;
+                      setTimeout(() => setOutgoing(null), 520);
+                    }}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      i === current ? "w-6 bg-neon" : "w-1.5 bg-white/20"
+                    }`}
+                  />
+                ))}
               </div>
 
               {/* Floating badge — price */}
-              <div className="absolute -bottom-4 -left-6 bg-dark-elevated border border-dark-border rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3">
+              <div className="absolute -bottom-4 -left-6 bg-dark-elevated border border-dark-border rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3 z-20">
                 <div className="w-8 h-8 rounded-full bg-neon/15 flex items-center justify-center">
                   <span className="text-neon text-sm font-bold">฿</span>
                 </div>
                 <div>
-                  <p className="text-xs text-white/40">From</p>
-                  <p className="text-white font-bold text-sm">290 / day</p>
+                  <p className="text-xs text-white/40">Starting from</p>
+                  <p className="text-white font-bold text-sm">
+                    {active.price} / day
+                  </p>
                 </div>
               </div>
 
               {/* Floating badge — model */}
-              <div className="absolute -top-4 -right-6 bg-dark-elevated border border-neon/20 rounded-2xl px-4 py-3 shadow-xl">
-                <p className="text-neon text-xs font-semibold">
-                  Nike Vaporfly 3
-                </p>
+              <div className="absolute -top-4 -right-6 bg-dark-elevated border border-neon/20 rounded-2xl px-4 py-3 shadow-xl z-20">
+                <p className="text-neon text-xs font-semibold">{active.name}</p>
                 <p className="text-white/40 text-xs">Available now</p>
               </div>
             </div>

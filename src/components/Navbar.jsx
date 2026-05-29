@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { label: "Catalog", href: "#catalog" },
   { label: "How it works", href: "#features" },
   { label: "Community", href: "#community" },
-  { label: "Reviews", href: "#reviews" },
+  { label: "Contact Us", href: "#contact" },
 ];
 
 export default function Navbar() {
