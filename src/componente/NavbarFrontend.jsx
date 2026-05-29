@@ -3,11 +3,10 @@ import ActionButton from './ActionButton';
 
 export default function Navbar({ setPage, currentPage }) {
     return (
-        <nav className="flex justify-between items-center p-5 bg-black text-white border-b border-gray-800 sticky top-0 z-50">
-            <div className="text-s font-slim">Generation Thailand</div>
+        <nav className="flex justify-between items-center p-5 bg-black border-gray-800 sticky top-0 z-50">
+            <div className="font-black text-[#b4ff39] tracking-wider">KINETIX</div>
 
-            <div className="flex gap-8 grow justify-center">
-                git merge upstream/main
+            <div className="hidden md:flex gap-6 text-xs text-gray-400">
                 <button
                     onClick={() => setPage('allProduct')}
                     className={`text-sm transition-colors ${currentPage === 'allProduct' ? 'text-[#b4ff39] font-bold' : 'text-gray-400 hover:text-white'}`}
@@ -36,10 +35,10 @@ export default function Navbar({ setPage, currentPage }) {
                 >
                     Contact Us
                 </button>
+            </div>
+            <div>
+                <ActionButton text="Let's Start" onClick={() => setPage('login')} />
 
-                <div>
-                    <ActionButton text="Let's Start" onClick={() => setPage('login')} />
-                </div>
             </div>
         </nav>
     );

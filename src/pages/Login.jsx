@@ -27,7 +27,8 @@ function Login({ setPage }) {
                 </form>
                 <div className="mt-6 flex flex-col items-center gap-2">
                     <p className="text-sm text-gray-400">
-                        Don't have an account? <span className="text-blue-500 cursor-pointer hover:underline">Sign up</span>
+                        Don't have an account?
+                        <button onClick={() => setPage('signup')} className="text-blue-500 cursor-pointer hover:underline">Sign up</button>
                     </p>
                     <button onClick={() => setPage('home')} className="text-gray-500 hover:text-white text-sm transition-all mt-2 underline">
                         Back to Home
