@@ -1,145 +1,98 @@
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import ButtonMain from "./componente/ButtonMain";
-import LoginButton from "./componente/LoginButton";
-import Section01 from "./componente/Section01";
-import SignupPage from "./componente/SignupPage";
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "./assets/vite.svg";
-// import heroImg from "./assets/hero.png";
-import Secondbutton from "./componente/Secondbutton";
-import HeroButton from "./componente/HeroButton";
-import Section_03 from "./componente/Section_03";
+
+import Layout from "./componente/Layout";
+import ContactUs from "./Page/ContactUs";
+import HomePage from "./Page/HomePage";
+import Pricing from "./Page/Pricing";
+import FAQ from "./Page/FAQ";
+import HowItWorks from "./Page/HowItWorks";
+import User_interFace from "./Page/User_interFace";
+import AdminDashboard from "./Page/AdminDashBoard";
+
+const dashboardLoader = async () => {
+  return {
+    user: {
+      initials: "SN",
+      name: "สมชาย นิจวัง",
+      role: "ELITE RUNNER",
+      score: "4.9",
+      rented: "47",
+      level: "6",
+    },
+    cardStats: [
+      {
+        label: "ยอดคงเหลือ",
+        value: "$7,840",
+        note: "+12% จากเดือนก่อน",
+        accent: true,
+      },
+      { label: "รายการเช่า", value: "2", note: "กำลังใช้งาน" },
+      { label: "ยอดเช่า", value: "4,956", note: "จำนวนกิโลเมตรรวม" },
+      {
+        label: "กำไรสะสม",
+        value: "$7,840",
+        note: "จากการปล่อยเช่า",
+        accent: true,
+      },
+    ],
+    rentItems: [
+      {
+        name: "Pegasus 41",
+        subtitle: "ไซซ์ 42 - เช่า 3 วัน",
+        price: "$20/วัน",
+      },
+      { name: "Clifton 9", subtitle: "ไซซ์ 43 - เช่า 5 วัน", price: "$80/วัน" },
+    ],
+    historyItems: [
+      { name: "Pegasus 41", status: "$20/วัน", badge: "คืนแล้ว" },
+      { name: "Clifton 9", status: "$80/วัน", badge: "กำลังเช่า" },
+      { name: "Pegasus 41", status: "$20/วัน", badge: "คืนแล้ว" },
+      { name: "Clifton 9", status: "$80/วัน", badge: "กำลังเช่า" },
+    ],
+    quickFilters: ["All", "Nike", "Adidas", "ASICS", "Hoka", "Brooks"],
+    menuItems: [
+      "ภาพรวม",
+      "การแจ้งเตือน",
+      "ประวัติการเช่า",
+      "นัดรับ-ส่ง",
+      "บัญชี",
+      "ข้อมูลส่วนตัว",
+      "ความปลอดภัย",
+      "การชำระเงิน",
+    ],
+  };
+};
 
 
-function App() {
 
-  return (
-  <>
 
-    <ButtonMain />
-    <LoginButton />
-    <Section01 />
-    <SignupPage />
 
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started to day. TaeVedio</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "contact", element: <ContactUs /> },
+      { path: "pricing", element: <Pricing /> },
+      { path: "how-it-works", element: <HowItWorks /> },
+      { path: "faq", element: <FAQ /> },
+      {
+        path: "dashboard",
+        element: <User_interFace />,
+        loader: dashboardLoader,
+      },
+      {
+        path: "admin-dashboard",
+        element: <AdminDashboard />,
+      },
+    ],
+  },
+]);
 
-      <div className="ticks"></div>
+export default function App() {
+  return <RouterProvider router={router} />;
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-
-    
-
-    <div className="flex-col">
-      <HeroButton />
-      <Secondbutton />
-       <Section_03 />
-    </div>
-  </>
-  );
 }
-
-export default App;
-
