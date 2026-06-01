@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // ค่าเริ่มต้นของ form ทั้งหมด
 const initialFormData = {
@@ -445,7 +446,7 @@ export default function SignupPage() {
 
                 <p className="text-center text-zinc-500 text-sm pt-2">
                   Already have an account?{" "}
-                  <span className="text-white hover:text-lime-400 cursor-pointer">Sign In</span>
+                  <Link to="/login" className="text-white hover:text-lime-400 cursor-pointer" >Sign In</Link>
                 </p>
               </form>
             </>

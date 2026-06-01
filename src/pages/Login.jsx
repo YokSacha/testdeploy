@@ -1,7 +1,8 @@
 import React from "react";
-import ActionButton from "../componente/ActionButton";
+import { Link } from "react-router-dom";
+import ActionButton from "../components/ActionButton";
 
-function Login({ setPage }) {
+function Login() {
     return (
         <div className="max-w-md mx-auto py-20 px-4">
             <div className="bg-[#12121a] p-8 rounded-2xl border border-gray-800 shadow-2xl">
@@ -27,12 +28,12 @@ function Login({ setPage }) {
                 </form>
                 <div className="mt-6 flex flex-col items-center gap-2">
                     <p className="text-sm text-gray-400">
-                        Don't have an account?
-                        <button onClick={() => setPage('signup')} className="text-blue-500 cursor-pointer hover:underline">Sign up</button>
+                        Don't have an account?{" "}
+                        <Link to="/signup" className="text-blue-500 cursor-pointer hover:underline">Sign up</Link>
                     </p>
-                    <button onClick={() => setPage('home')} className="text-gray-500 hover:text-white text-sm transition-all mt-2 underline">
+                    <Link to="/" className="text-gray-500 hover:text-white text-sm transition-all mt-2 underline">
                         Back to Home
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
