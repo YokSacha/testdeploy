@@ -6,7 +6,7 @@ export default function Section04() {
 
     const handleRent = (product) => {
         if (!user) {
-            alert("กรุณาเข้าสู่ระบบก่อนเช่ารองเท้า");
+            alert("Please login before renting shoes");
             return;
         }
 
@@ -17,7 +17,7 @@ export default function Section04() {
             period: "/วัน",
             image: "👟",
         });
-        alert(`เพิ่ม ${product.model_name} ลงในรายการเช่าแล้ว!`);
+        alert(`Added ${product.model_name} to rental list!`);
     };
 
     const featuredProducts = productsData.slice(0, 3);
@@ -27,10 +27,10 @@ export default function Section04() {
             <div className="mx-auto max-w-[1560px]">
                 <div className="mb-16">
                     <p className="text-[13px] font-semibold text-[#C3FF51] uppercase tracking-[0.35em] mb-4">
-                        -------- รองเท้าแนะนำ
+                        -------- RECOMMENDED
                     </p>
                     <h2 className="text-4xl md:text-5xl font-extrabold">
-                        รองเท้ายอดนิยม
+                        Popular Shoes
                     </h2>
                 </div>
 
@@ -59,7 +59,7 @@ export default function Section04() {
                                             <span key={i} className="text-[#C3FF51]">★</span>
                                         ))}
                                     </div>
-                                    <span className="text-[13px] text-[#8f94a5]">(4.9 รีวิว)</span>
+                                    <span className="text-[13px] text-[#8f94a5]">(4.9 Reviews)</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div>
@@ -72,7 +72,7 @@ export default function Section04() {
                                         onClick={() => handleRent(product)}
                                         className="rounded-3xl bg-[#C3FF51] text-black px-6 py-3 font-semibold hover:bg-[#D3FE51] transition text-[13px]"
                                     >
-                                        เช่า
+                                        Rent
                                     </button>
                                 </div>
                             </div>

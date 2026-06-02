@@ -11,14 +11,17 @@ import Community from '../components/Community';
 import OurStory from '../components/OurStory';
 import FAQ from '../components/FAQ';
 import ContactPage from '../pages/ContactPage';
+import Catalog from '../pages/Catalog';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
 import Login from "../pages/Login";
 import SignupPage from "../components/SignupPage";
+import ScrollArrow from "../components/ScrollArrow";
 
 function HomeContent() {
   return (
     <>
+      <ScrollArrow />
       <Hero />
       <Features />
       <HowItWorksSection />
@@ -44,6 +47,7 @@ export default function Home() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="signup" element={<SignupPage />} />
           <Route path="login" element={<Login />} />
+          <Route path="catalog" element={<Catalog />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

@@ -19,22 +19,22 @@ const CheckoutPage = () => {
 
                 {/* Left Column: Form Sections */}
                 <div className="lg:col-span-2 space-y-8">
-                    <h1 className="text-3xl font-bold">สรุปการเช่า</h1>
+                    <h1 className="text-3xl font-bold">Rental Summary</h1>
 
                     <section className="bg-neutral-900 p-6 rounded-2xl border border-neutral-800">
-                        <h2 className="text-xl font-semibold mb-4">ข้อมูลการจัดส่ง</h2>
+                        <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
                         <div className="grid grid-cols-2 gap-4">
-                            <input type="text" placeholder="ชื่อ-นามสกุล" className="bg-neutral-950 border border-neutral-800 p-3 rounded-lg w-full" />
-                            <input type="tel" placeholder="เบอร์โทรศัพท์" className="bg-neutral-950 border border-neutral-800 p-3 rounded-lg w-full" />
-                            <textarea placeholder="ที่อยู่จัดส่ง" className="col-span-2 bg-neutral-950 border border-neutral-800 p-3 rounded-lg w-full h-24" />
+                            <input type="text" placeholder="Full Name" className="bg-neutral-950 border border-neutral-800 p-3 rounded-lg w-full" />
+                            <input type="tel" placeholder="Phone Number" className="bg-neutral-950 border border-neutral-800 p-3 rounded-lg w-full" />
+                            <textarea placeholder="Shipping Address" className="col-span-2 bg-neutral-950 border border-neutral-800 p-3 rounded-lg w-full h-24" />
                         </div>
                     </section>
 
                     <section className="bg-neutral-900 p-6 rounded-2xl border border-neutral-800">
-                        <h2 className="text-xl font-semibold mb-4">เลือกวันใช้งาน</h2>
+                        <h2 className="text-xl font-semibold mb-4">Select Dates</h2>
                         <div className="flex gap-4">
                             <input type="date" className="bg-neutral-950 border border-neutral-800 p-3 rounded-lg flex-1" />
-                            <span className="self-center">ถึง</span>
+                            <span className="self-center">to</span>
                             <input type="date" className="bg-neutral-950 border border-neutral-800 p-3 rounded-lg flex-1" />
                         </div>
                     </section>
@@ -43,7 +43,7 @@ const CheckoutPage = () => {
                 {/* Right Column: Order Summary */}
                 <div className="lg:col-span-1">
                     <div className="bg-neutral-900 p-8 rounded-3xl border border-neutral-800 sticky top-8">
-                        <h2 className="text-2xl font-bold mb-6">ยอดรวมการชำระเงิน</h2>
+                        <h2 className="text-2xl font-bold mb-6">Payment Total</h2>
 
                         <div className="space-y-4 text-neutral-400">
                             <div className="flex justify-between">
@@ -51,24 +51,24 @@ const CheckoutPage = () => {
                                 <span>฿{subtotal}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>ค่าจัดส่ง</span>
+                                <span>Shipping Fee</span>
                                 <span>฿{orderSummary.shipping}</span>
                             </div>
                             <div className="flex justify-between text-red-400">
-                                <span>ส่วนลด</span>
+                                <span>Discount</span>
                                 <span>-฿{orderSummary.discount}</span>
                             </div>
                             <div className="border-t border-neutral-800 pt-4 flex justify-between text-xl font-bold text-neutral-100">
-                                <span>รวมทั้งสิ้น</span>
+                                <span>Total Amount</span>
                                 <span className="text-lime-400">฿{total}</span>
                             </div>
                         </div>
 
                         <button className="w-full mt-8 bg-lime-400 hover:bg-lime-500 text-neutral-950 font-bold py-4 rounded-xl transition duration-200">
-                            ยืนยันการเช่า
+                            Confirm Rental
                         </button>
                         <p className="text-center text-xs text-neutral-600 mt-4">
-                            เมื่อกดปุ่ม คุณยอมรับเงื่อนไขการเช่าของ KINETIX
+                            By clicking, you agree to KINETIX rental terms.
                         </p>
                     </div>
                 </div>

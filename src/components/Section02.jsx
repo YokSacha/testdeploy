@@ -13,10 +13,10 @@ export default function Section02() {
             <div className="mx-auto max-w-[1560px]">
                 <div className="mb-16">
                     <p className="text-[13px] font-semibold text-[#C3FF51] uppercase tracking-[0.35em] mb-4">
-                        -------- แบรนด์ที่มี
+                        -------- AVAILABLE BRANDS
                     </p>
                     <h2 className="text-4xl md:text-5xl font-extrabold">
-                        รองเท้าแบรนด์ชั้นนำ
+                        Top Tier Brands
                     </h2>
                 </div>
 

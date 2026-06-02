@@ -1,6 +1,6 @@
 export default function OurStory() {
   return (
-    <section id="story" className="py-10 lg:py-12">
+    <section id="ourstory" className="py-10 lg:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 

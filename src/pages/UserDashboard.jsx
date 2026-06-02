@@ -35,14 +35,14 @@ const CurrentRentalItem = ({ brand, name, size, date, price }) => (
             <div className="col-span-2">
                 <p className="text-sm text-neutral-500">{brand}</p>
                 <p className="text-lg font-bold text-neutral-100">{name}</p>
-                <p className="text-xs text-neutral-500">ไซส์ {size} ∙ เริ่ม {date}</p>
+                <p className="text-xs text-neutral-500">Size {size} ∙ Start {date}</p>
             </div>
             <div className="col-span-2 text-right">
                 <p className="text-2xl font-bold text-neutral-100"><span className="text-lime-400">฿</span>{price}</p>
                 <p className="text-xs text-neutral-500">/ วัน</p>
             </div>
             <div className="text-right">
-                <button className="bg-lime-400 text-neutral-950 font-bold px-5 py-2 rounded-lg text-sm">ค่ำสั่งซื้อ</button>
+                <button className="bg-lime-400 text-neutral-950 font-bold px-5 py-2 rounded-lg text-sm">Order</button>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@ const RentalHistoryRow = ({ brand, model, size, dateRange, days, price, status }
         <td className="py-5 text-center font-bold text-neutral-100"><span className="text-lime-400">฿</span>{price}</td>
         <td className="py-5 text-center">{status}</td>
         <td className="py-5 text-right">
-            <button className="bg-neutral-800 text-neutral-100 text-xs px-4 py-1.5 rounded-lg border border-neutral-700">เช่าซ้ำ</button>
+            <button className="bg-neutral-800 text-neutral-100 text-xs px-4 py-1.5 rounded-lg border border-neutral-700">Re-rent</button>
         </td>
     </tr>
 );
@@ -92,16 +92,16 @@ const DashboardPage = () => {
     const returnRate = 100;
 
     const currentRentalsData = [
-        { brand: 'NIKE', name: 'Pegasus 41', size: 42, date: '8 เม.ย. – คืน 15 เม.ย.', price: 150 },
-        { brand: 'HOKA', name: 'Clifton 9', size: 43, date: '10 เม.ย. – คืน 17 เม.ย.', price: 170 },
+        { brand: 'NIKE', name: 'Pegasus 41', size: 42, date: 'Apr 8 – Return Apr 15', price: 150 },
+        { brand: 'HOKA', name: 'Clifton 9', size: 43, date: 'Apr 10 – Return Apr 17', price: 170 },
     ];
 
     const rentalHistoryData = [
-        { brand: 'ADIDAS', model: 'Ultraboost 23', size: 42, dateRange: '1-7 เม.ย. 2568', days: 7, price: 1260, status: 'คืนแล้ว' },
-        { brand: 'ASICS', model: 'Gel-Kayano 31', size: 42, dateRange: '20-27 มี.ค. 2568', days: 7, price: 1120, status: 'คืนแล้ว' },
-        { brand: 'NEW BALANCE', model: 'Fresh Foam X 1080v13', size: 43, dateRange: '5-12 มี.ค. 2568', days: 7, price: 980, status: 'คืนแล้ว' },
-        { brand: 'BROOKS', model: 'Ghost 16', size: 42, dateRange: '18-25 ก.พ. 2568', days: 7, price: 840, status: 'คืนแล้ว' },
-        { brand: 'NIKE', model: 'Vaporfly 3', size: 42, dateRange: '1-10 ก.พ. 2568', days: 9, price: 2250, status: 'คืนแล้ว' },
+        { brand: 'ADIDAS', model: 'Ultraboost 23', size: 42, dateRange: '1-7 Apr 2025', days: 7, price: 1260, status: 'Returned' },
+        { brand: 'ASICS', model: 'Gel-Kayano 31', size: 42, dateRange: '20-27 Mar 2025', days: 7, price: 1120, status: 'Returned' },
+        { brand: 'NEW BALANCE', model: 'Fresh Foam X 1080v13', size: 43, dateRange: '5-12 Mar 2025', days: 7, price: 980, status: 'Returned' },
+        { brand: 'BROOKS', model: 'Ghost 16', size: 42, dateRange: '18-25 Feb 2025', days: 7, price: 840, status: 'Returned' },
+        { brand: 'NIKE', model: 'Vaporfly 3', size: 42, dateRange: '1-10 Feb 2025', days: 9, price: 2250, status: 'Returned' },
     ];
 
     const brands = [
@@ -110,11 +110,11 @@ const DashboardPage = () => {
     ];
 
     const activities = [
-        { title: 'เช่า Hoka Clifton 9 สำเร็จ', time: 'วันนี้ 09:15', type: 'booked' },
-        { title: 'ได้รับ +170 แต้ม จากการเช่า', time: 'วันนี้ 09:16', type: 'points' },
-        { title: 'คืน Adidas Ultraboost 23 ตรงเวลา', time: 'เมื่อวาน 14:30', type: 'check' },
-        { title: 'อัปเกรดเป็นระดับ Elite Runner', time: '5 เม.ย. 2568', type: 'upgrade' },
-        { title: 'จอง Nike Vaporfly 3 ล่วงหน้า', time: '2 เม.ย. 2568', type: 'booked' },
+        { title: 'Successfully rented Hoka Clifton 9', time: 'Today 09:15', type: 'booked' },
+        { title: 'Received +170 points from rental', time: 'Today 09:16', type: 'points' },
+        { title: 'Returned Adidas Ultraboost 23 on time', time: 'Yesterday 14:30', type: 'check' },
+        { title: 'Upgraded to Elite Runner level', time: '5 Apr 2025', type: 'upgrade' },
+        { title: 'Pre-booked Nike Vaporfly 3', time: '2 Apr 2025', type: 'booked' },
     ];
 
     return (
@@ -123,13 +123,13 @@ const DashboardPage = () => {
             <header className="border-b border-neutral-800 px-6 py-4 flex items-center justify-between sticky top-0 bg-neutral-950 z-50">
                 <div className="text-3xl font-extrabold text-lime-400 tracking-tighter">KINETIX</div>
                 <nav className="flex items-center gap-10 text-sm text-neutral-300">
-                    {['รองเท้าทั้งหมด', 'แบรนด์', 'วิธีเช่า', 'ราคา'].map(item => (
+                    {['All Shoes', 'Brands', 'How to rent', 'Pricing'].map(item => (
                         <a key={item} href="#" className="hover:text-lime-400 transition">{item}</a>
                     ))}
                 </nav>
                 <div className="flex items-center gap-3">
                     <button className="bg-lime-400 text-neutral-950 font-bold px-6 py-2 rounded-lg text-sm flex items-center gap-2">
-                        <span>เข่าเลย</span>
+                        <span>Rent Now</span>
                         <span>→</span>
                     </button>
                     <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-lg text-lime-400 border border-neutral-700">SN</div>
@@ -143,7 +143,7 @@ const DashboardPage = () => {
                     {/* User Profile */}
                     <div className="text-center flex flex-col items-center">
                         <div className="w-24 h-24 rounded-full bg-neutral-800 flex items-center justify-center font-black text-6xl text-lime-400 border-4 border-lime-400 shadow-[0_0_20px_rgba(163,230,53,0.3)]">SN</div>
-                        <h1 className="mt-6 text-3xl font-bold tracking-tight">สมชาย นักวิ่ง</h1>
+                        <h1 className="mt-6 text-3xl font-bold tracking-tight">Somchai Runner</h1>
                         <p className="text-neutral-500 text-sm">somchai@email.com</p>
                         <div className="mt-4 inline-flex items-center gap-2 bg-lime-400 text-neutral-950 text-xs font-bold px-3 py-1 rounded-full">
                             <span className="w-1.5 h-1.5 bg-neutral-950 rounded-full"></span>
@@ -152,13 +152,13 @@ const DashboardPage = () => {
                     </div>
                     {/* Main Navigation */}
                     <nav className="flex flex-col gap-3">
-                        <h2 className="text-xs text-neutral-500 tracking-wider font-semibold uppercase mb-1">เมนูหลัก</h2>
+                        <h2 className="text-xs text-neutral-500 tracking-wider font-semibold uppercase mb-1">Main Menu</h2>
                         {[
-                            { label: 'ภาพรวม', active: true },
-                            { label: 'การแจ้งเตือน', badge: 1 },
-                            { label: 'ประวัติการเช่า' },
-                            { label: 'แต้มสะสม' },
-                            { label: 'จองล่วงหน้า' },
+                            { label: 'Overview', active: true },
+                            { label: 'Notifications', badge: 1 },
+                            { label: 'Rental History' },
+                            { label: 'Reward Points' },
+                            { label: 'Pre-booking' },
                         ].map(item => (
                             <a key={item.label} href="#" className={`flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-lg ${item.active ? 'bg-neutral-800 text-lime-400 font-medium' : 'text-neutral-300 hover:bg-neutral-900'}`}>
                                 <div className="flex items-center gap-3">
@@ -171,11 +171,11 @@ const DashboardPage = () => {
                     </nav>
                     {/* Account Navigation */}
                     <nav className="flex flex-col gap-3 mt-auto">
-                        <h2 className="text-xs text-neutral-500 tracking-wider font-semibold uppercase mb-1">บัญชี</h2>
+                        <h2 className="text-xs text-neutral-500 tracking-wider font-semibold uppercase mb-1">Account</h2>
                         {[
-                            { label: 'ข้อมูลส่วนตัว' },
-                            { label: 'ความปลอดภัย' },
-                            { label: 'การชำระเงิน' },
+                            { label: 'Profile' },
+                            { label: 'Security' },
+                            { label: 'Payment' },
                         ].map(item => (
                             <a key={item.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-lg text-neutral-300 hover:bg-neutral-900">
                                 <span className="text-neutral-600">⊡</span>
@@ -191,22 +191,22 @@ const DashboardPage = () => {
                     <div className="flex items-center justify-between mb-10">
                         <div>
                             <h1 className="text-4xl font-bold tracking-tight flex items-center gap-3">
-                                ยินดีต้อนรับกลับมา, สมชาย 👋
+                                Welcome back, Somchai 👋
                             </h1>
-                            <p className="text-neutral-500 text-sm mt-1">อาทิตย์นี้คุณวิ่งไปแล้ว 3 วัน ∙ อัปเดตล่าสุด วันนี้ 09:41</p>
+                            <p className="text-neutral-500 text-sm mt-1">You've run 3 days this week ∙ Last updated Today 09:41</p>
                         </div>
                         <button className="bg-lime-400 text-neutral-950 font-bold px-6 py-3 rounded-xl flex items-center gap-2 text-sm shadow-lg shadow-lime-400/20">
                             <span className="font-extrabold text-lg">+</span>
-                            เข่ารองเท้าใหม่
+                            Rent New Shoes
                         </button>
                     </div>
 
                     {/* Stats Cards Grid */}
                     <div className="grid grid-cols-4 gap-6 mb-10">
-                        <StatCard title="ยอดเช่าทั้งหมด" value={totalRentals.toLocaleString()} detail="↑ 1.2% จากเดือนที่แล้ว" iconColor="bg-lime-400" />
-                        <StatCard title="กำลังเช่าอยู่" value={currentRentalsCount} detail="คู่ ∙ คืนอีก 5 วัน" />
-                        <StatCard title="แต้มสะสม" value={points.toLocaleString()} detail="อีก 660 แต้ม ขึ้น Platinum" />
-                        <StatCard title="คะแนนการคืน" value={`${returnRate}%`} detail="✓ คืนตรงเวลาทุกครั้ง" detailColor="text-green-500" />
+                        <StatCard title="Total Rentals" value={totalRentals.toLocaleString()} detail="↑ 1.2% from last month" iconColor="bg-lime-400" />
+                        <StatCard title="Active Rentals" value={currentRentalsCount} detail="Pairs ∙ Return in 5 days" />
+                        <StatCard title="Reward Points" value={points.toLocaleString()} detail="660 more points to Platinum" />
+                        <StatCard title="Return Score" value={`${returnRate}%`} detail="✓ Always returned on time" detailColor="text-green-500" />
                     </div>
 
                     {/* Main sections grid */}
@@ -216,8 +216,8 @@ const DashboardPage = () => {
                             {/* Current Rentals */}
                             <section className="bg-neutral-900/50 border border-neutral-800 rounded-3xl p-8">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-2xl font-semibold">กำลังเช่าอยู่</h2>
-                                    <a href="#" className="text-lime-400 text-sm font-medium hover:underline">ดูทั้งหมด →</a>
+                                    <h2 className="text-2xl font-semibold">Currently Renting</h2>
+                                    <a href="#" className="text-lime-400 text-sm font-medium hover:underline">View All →</a>
                                 </div>
                                 <div className="flex flex-col gap-5">
                                     {currentRentalsData.map((rental, i) => (
@@ -229,14 +229,14 @@ const DashboardPage = () => {
                             {/* Rental History */}
                             <section className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h2 className="text-2xl font-semibold">ประวัติการเช่า</h2>
+                                    <h2 className="text-2xl font-semibold">Rental History</h2>
                                     <a href="#" className="text-neutral-500 text-sm font-medium hover:text-lime-400">Export CSV →</a>
                                 </div>
                                 {/* Filter and Search Bar */}
                                 <div className="flex items-center gap-3 mb-6 bg-neutral-950 border border-neutral-800 rounded-2xl p-2">
-                                    <input type="search" placeholder="ค้นหาตามแบรนด์, รุ่น, วันที่..." className="flex-1 bg-transparent text-sm text-neutral-100 placeholder:text-neutral-600 px-3 py-2.5 rounded-lg border-r border-neutral-800 focus:ring-0 focus:outline-none" />
+                                    <input type="search" placeholder="Search by brand, model, date..." className="flex-1 bg-transparent text-sm text-neutral-100 placeholder:text-neutral-600 px-3 py-2.5 rounded-lg border-r border-neutral-800 focus:ring-0 focus:outline-none" />
                                     <div className="flex items-center gap-1.5 pl-1">
-                                        {['ทั้งหมด', 'Nike', 'Adidas', 'ASICS', 'Hoka', 'Brooks'].map((filter, i) => (
+                                        {['All', 'Nike', 'Adidas', 'ASICS', 'Hoka', 'Brooks'].map((filter, i) => (
                                             <button key={filter} className={`text-xs font-semibold px-4 py-2 rounded-lg border ${i === 0 ? 'bg-lime-400 text-neutral-950 border-lime-400' : 'text-neutral-300 border-neutral-800 hover:border-neutral-700 hover:text-lime-400'}`}>
                                                 {filter}
                                             </button>
@@ -247,7 +247,7 @@ const DashboardPage = () => {
                                 <table className="w-full text-left">
                                     <thead className="border-b border-neutral-800 text-xs text-neutral-500 uppercase tracking-wide">
                                         <tr>
-                                            {['รองเท้า', 'ไซส์', 'วันที่', 'วัน', 'ราคา', 'สถานะ', ''].map(th => (
+                                            {['Shoes', 'Size', 'Date', 'Days', 'Price', 'Status', ''].map(th => (
                                                 <th key={th} className={`py-4 font-semibold ${th !== 'รองเท้า' ? 'text-center' : ''} ${th === '' ? 'text-right' : ''}`}>{th}</th>
                                             ))}
                                         </tr>
@@ -264,20 +264,20 @@ const DashboardPage = () => {
                             {/* Reward Points Card */}
                             <section className="bg-neutral-950 border border-neutral-800 rounded-3xl p-8">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h2 className="text-2xl font-semibold">แต้มสะสม</h2>
-                                    <a href="#" className="text-neutral-500 text-sm font-medium hover:text-lime-400">แลกแต้ม</a>
+                                    <h2 className="text-2xl font-semibold">Reward Points</h2>
+                                    <a href="#" className="text-neutral-500 text-sm font-medium hover:text-lime-400">Redeem</a>
                                 </div>
-                                <p className="text-sm text-neutral-500">แต้มของคุณ</p>
+                                <p className="text-sm text-neutral-500">Your points</p>
                                 <p className="text-4xl font-black text-neutral-100 mb-6 flex items-baseline gap-2">
                                     {points.toLocaleString()} <span className="text-xl font-bold text-lime-400">pts</span>
                                 </p>
                                 <div className="relative pt-6 border-t border-neutral-800 mt-6">
                                     <p className="absolute -top-3 right-0 bg-neutral-950 text-neutral-500 text-xs px-2">
-                                        Platinum ต้องการ <span className='text-neutral-100 font-bold'>3,000 pts</span>
+                                        Platinum requires <span className='text-neutral-100 font-bold'>3,000 pts</span>
                                     </p>
                                     <div className="text-sm flex items-center justify-between gap-1 mb-3">
                                         <UserLevelBadge level="Elite" isActive={true} />
-                                        <span className="text-neutral-600 text-xs flex-1 text-right">เหลืออีก 660 แต้ม</span>
+                                        <span className="text-neutral-600 text-xs flex-1 text-right">660 pts remaining</span>
                                         <UserLevelBadge level="Platinum" isActive={false} />
                                     </div>
                                     <div className="flex gap-2">
@@ -289,8 +289,8 @@ const DashboardPage = () => {
                             {/* Favorite Brands */}
                             <section className="bg-neutral-950 border border-neutral-800 rounded-3xl p-8">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h2 className="text-2xl font-semibold">แบรนด์ที่ชอบ</h2>
-                                    <a href="#" className="text-neutral-500 text-sm font-medium hover:text-lime-400">แก้ไข</a>
+                                    <h2 className="text-2xl font-semibold">Favorite Brands</h2>
+                                    <a href="#" className="text-neutral-500 text-sm font-medium hover:text-lime-400">Edit</a>
                                 </div>
                                 <div className="grid grid-cols-3 gap-5">
                                     {brands.map(brand => (
@@ -299,7 +299,7 @@ const DashboardPage = () => {
                                                 {brand.name === 'New Balance' ? 'NB' : brand.name === 'ASICS' ? 'AS' : brand.name.slice(0, 1).toUpperCase()}
                                             </div>
                                             <p className="text-sm font-bold text-neutral-100">{brand.name}</p>
-                                            <p className="text-xs text-neutral-500">{brand.count} ครั้ง</p>
+                                            <p className="text-xs text-neutral-500">{brand.count} times</p>
                                         </div>
                                     ))}
                                 </div>
@@ -308,7 +308,7 @@ const DashboardPage = () => {
                             {/* Activity Feed */}
                             <section className="bg-neutral-950 border border-neutral-800 rounded-3xl p-8">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-2xl font-semibold">กิจกรรมล่าสุด</h2>
+                                    <h2 className="text-2xl font-semibold">Recent Activity</h2>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     {activities.map((activity, i) => (
@@ -323,7 +323,7 @@ const DashboardPage = () => {
 
             {/* Footer */}
             <footer className="border-t border-neutral-800 text-center py-6 text-neutral-600 text-xs bg-neutral-950">
-                © 2026 KINETIX - All rights reserved - นโยบายความเป็นส่วนตัว
+                © 2026 KINETIX - All rights reserved - Privacy Policy
             </footer>
         </div>
     );

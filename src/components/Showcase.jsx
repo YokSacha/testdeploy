@@ -122,8 +122,8 @@ const SHOES = [
 ]
 
 const BADGE_COLORS = {
-  neon:   'bg-neon text-dark',
-  cyan:   'bg-cyan text-dark',
+  neon: 'bg-neon text-dark',
+  cyan: 'bg-cyan text-dark',
   orange: 'bg-[#FF6B35] text-white',
   purple: 'bg-[#A855F7] text-white',
 }
@@ -185,7 +185,7 @@ export default function Showcase() {
   ).sort((a, b) => b.price - a.price)
 
   return (
-    <section id="catalog" className="py-10 lg:py-12 bg-dark-card/30">
+    <section id="showcase" className="py-10 lg:py-12 bg-dark-card/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
@@ -199,11 +199,10 @@ export default function Showcase() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
-                activeCategory === cat
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${activeCategory === cat
                   ? 'bg-neon text-dark'
                   : 'bg-dark-elevated border border-dark-border text-white/50 hover:border-neon/30 hover:text-white'
-              }`}
+                }`}
             >
               {cat}
             </button>

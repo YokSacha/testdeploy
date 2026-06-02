@@ -1,10 +1,11 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const NAV_LINKS = [
-  { label: "Catalog",      href: "#catalog"    },
-  { label: "How it works", href: "/#features"  },
-  { label: "Community",    href: "/#community" },
-  { label: "Contact Us",   href: "/#contact"   },
+  { label: "Catalog", to: "/catalog" },
+  { label: "How it works", to: "/howitworkspage" },
+  { label: "Community", to: "/" },
+  { label: "Contact Us", to: "/contact" },
 ];
 
 export default function CatalogNavbar() {
@@ -19,10 +20,10 @@ export default function CatalogNavbar() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            {NAV_LINKS.map((link) => (
-              <a key={link.label} href={link.href} className="text-sm font-medium text-white/60 hover:text-[#C3FF51] transition-colors duration-200">
+            {NAV_LINKS.map((link) => ( // Changed to use Link component
+              <Link key={link.label} to={link.to} className="text-sm font-medium text-white/60 hover:text-[#C3FF51] transition-colors duration-200">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-// ค่าเริ่มต้นของ form ทั้งหมด
+
 const initialFormData = {
-  // Personal Information
+
   firstName: "",
   lastName: "",
   email: "",
@@ -11,16 +11,16 @@ const initialFormData = {
   address: "",
   shoeSize: "",
 
-  // Bank Information
+
   bankName: "",
   accountNumber: "",
   accountName: "",
 
-  // Security
+
   password: "",
   confirmPassword: "",
 
-  // Terms
+
   agreeTerms: false,
   ageConfirm: false,
 };
@@ -30,7 +30,7 @@ export default function SignupPage() {
   const [submitted, setSubmitted] = useState(false);
   const [previewData, setPreviewData] = useState(null);
 
-  // Handler สำหรับ input ทุกชนิด
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -38,66 +38,66 @@ export default function SignupPage() {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // ลบ error ของ field นั้นทันทีที่ user แก้ไข
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
-  // Validation ทุก field
+
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim()) newErrors.firstName = "กรุณากรอกชื่อ";
-    if (!formData.lastName.trim()) newErrors.lastName = "กรุณากรอกนามสกุล";
+    if (!formData.firstName.trim()) newErrors.firstName = "Please enter your first name";
+    if (!formData.lastName.trim()) newErrors.lastName = "Please enter your last name";
 
     if (!formData.email.trim()) {
-      newErrors.email = "กรุณากรอกอีเมล";
+      newErrors.email = "Please enter your email";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "รูปแบบอีเมลไม่ถูกต้อง";
+      newErrors.email = "Invalid email format";
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์";
+      newErrors.phone = "Please enter your phone number";
     } else if (!/^\d{9,15}$/.test(formData.phone.replace(/[-\s]/g, ""))) {
-      newErrors.phone = "เบอร์โทรศัพท์ไม่ถูกต้อง";
+      newErrors.phone = "Invalid phone number";
     }
 
-    if (!formData.address.trim()) newErrors.address = "กรุณากรอกที่อยู่";
+    if (!formData.address.trim()) newErrors.address = "Please enter your address";
 
     if (!formData.shoeSize) {
-      newErrors.shoeSize = "กรุณากรอกไซส์รองเท้า";
+      newErrors.shoeSize = "Please enter your shoe size";
     } else if (formData.shoeSize < 30 || formData.shoeSize > 60) {
-      newErrors.shoeSize = "ไซส์รองเท้าต้องอยู่ระหว่าง 30-60";
+      newErrors.shoeSize = "Shoe size must be between 30 and 60";
     }
 
-    if (!formData.bankName.trim()) newErrors.bankName = "กรุณากรอกชื่อธนาคาร";
+    if (!formData.bankName.trim()) newErrors.bankName = "Please enter bank name";
     if (!formData.accountNumber.trim()) {
-      newErrors.accountNumber = "กรุณากรอกเลขบัญชี";
+      newErrors.accountNumber = "Please enter account number";
     } else if (!/^\d{10,16}$/.test(formData.accountNumber.replace(/[-\s]/g, ""))) {
-      newErrors.accountNumber = "เลขบัญชีต้องเป็นตัวเลข 10-16 หลัก";
+      newErrors.accountNumber = "Account number must be 10-16 digits";
     }
-    if (!formData.accountName.trim()) newErrors.accountName = "กรุณากรอกชื่อบัญชี";
+    if (!formData.accountName.trim()) newErrors.accountName = "Please enter account name";
 
     if (!formData.password) {
-      newErrors.password = "กรุณากรอกรหัสผ่าน";
+      newErrors.password = "Please enter password";
     } else if (formData.password.length < 8) {
-      newErrors.password = "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร";
+      newErrors.password = "Password must be at least 8 characters";
     }
 
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "กรุณายืนยันรหัสผ่าน";
+      newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "รหัสผ่านไม่ตรงกัน";
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
-    if (!formData.agreeTerms) newErrors.agreeTerms = "กรุณายอมรับเงื่อนไข";
-    if (!formData.ageConfirm) newErrors.ageConfirm = "กรุณายืนยันอายุ";
+    if (!formData.agreeTerms) newErrors.agreeTerms = "Please accept terms";
+    if (!formData.ageConfirm) newErrors.ageConfirm = "Please confirm your age";
 
     return newErrors;
   };
 
-  // เตรียม payload สำหรับส่งไป database (ไม่รวม password ซ้ำ และ terms checkbox)
+
   const buildPayload = () => ({
     personalInfo: {
       firstName: formData.firstName.trim(),
@@ -114,7 +114,7 @@ export default function SignupPage() {
       accountName: formData.accountName.trim(),
     },
     security: {
-      password: formData.password, // ในงานจริงควร hash ก่อนส่ง
+      password: formData.password,
     },
     meta: {
       agreedToTerms: formData.agreeTerms,
@@ -163,13 +163,13 @@ export default function SignupPage() {
     setPreviewData(null);
   };
 
-  // Component แสดง error ใต้ input
+
   const ErrorMsg = ({ field }) =>
     errors[field] ? (
       <p className="text-red-400 text-xs mt-1 ml-1">{errors[field]}</p>
     ) : null;
 
-  // class สำหรับ input ปกติ vs มี error
+
   const inputClass = (field) =>
     `w-full bg-black border rounded-xl px-4 py-3 focus:outline-none transition-colors ${errors[field]
       ? "border-red-500 focus:border-red-400 error-field"
@@ -178,24 +178,8 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-10 py-6 border-b border-zinc-900">
-        <div className="text-3xl font-bold tracking-wide">
-          KINETI<span className="text-lime-400">X</span>
-        </div>
-        <div className="hidden md:flex items-center gap-16 text-sm text-zinc-400">
-          <a href="#" className="hover:text-lime-400 transition-colors">Rental</a>
-          <a href="#" className="hover:text-lime-400 transition-colors">Brand</a>
-          <a href="#" className="hover:text-lime-400 transition-colors">How to</a>
-          <a href="#" className="hover:text-lime-400 transition-colors">Contact</a>
-        </div>
-        <button className="bg-lime-400 text-black px-8 py-3 rounded-2xl font-semibold hover:scale-105 transition-transform">
-          Login
-        </button>
-      </nav>
-
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div className="max-w-7xl mx-auto px-6 pt-28 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         {/* Left Content */}
         <div className="space-y-8">
           <div>
@@ -237,7 +221,7 @@ export default function SignupPage() {
                 </h3>
               </div>
               <p className="text-zinc-500 text-xs">
-                ข้อมูลด้านล่างพร้อมส่งไป API / Database แล้ว
+                The data below is ready to be sent to the API / Database.
               </p>
               <pre className="text-xs text-zinc-300 bg-black rounded-xl p-4 overflow-auto max-h-64 border border-zinc-800">
                 {JSON.stringify(previewData, null, 2)}
@@ -461,7 +445,7 @@ export default function SignupPage() {
               <div>
                 <h2 className="text-3xl font-bold">Account Created!</h2>
                 <p className="text-zinc-400 mt-2">
-                  ข้อมูลถูกเก็บแล้ว พร้อมส่งไปยัง database
+                  Data saved and ready for the database.
                 </p>
                 <p className="text-lime-400 font-medium mt-1">
                   {previewData?.personalInfo?.fullName}
@@ -475,7 +459,7 @@ export default function SignupPage() {
                   ["Shoe Size", previewData?.personalInfo?.shoeSize],
                   ["Bank", previewData?.bankInfo?.bankName],
                   ["Account", previewData?.bankInfo?.accountNumber],
-                  ["Registered At", new Date(previewData?.meta?.registeredAt).toLocaleString("th-TH")],
+                  ["Registered At", new Date(previewData?.meta?.registeredAt).toLocaleString("en-US")],
                 ].map(([label, value]) => (
                   <div key={label} className="flex justify-between text-sm">
                     <span className="text-zinc-500">{label}</span>

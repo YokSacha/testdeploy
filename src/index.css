@@ -3,6 +3,14 @@
 @theme {
   --color-dark: #080809;
   --font-sora: 'Sora', sans-serif;
+
+  /* KinetiX brand colors */
+  --color-kinetix-black: #080809;
+  --color-kinetix-white: #ffffff;
+  --color-kinetix-lime: #C3FF51;
+  --color-kinetix-aqua: #00E5FF;
+  --color-kinetix-border: #1e1e20;
+  --font-family-display: 'Sora', sans-serif;
 }
 
 @layer base {

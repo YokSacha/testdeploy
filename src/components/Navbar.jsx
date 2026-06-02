@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import Button from "./ui/Button";
 
 const NAV_LINKS = [
-  { label: "Catalog", href: "#catalog" },
+  { label: "Catalog", to: "/catalog" },
   { label: "How it works", to: "/howitworkspage" },
-  { label: "Community", href: "#community" },
+  { label: "Community", to: "/" },
   { label: "Contact Us", to: "/contact" },
 ];
 
@@ -67,8 +67,8 @@ export default function Navbar() {
             >
               Log in
             </Button>
-            <Button variant="primary" size="sm" to="/catalog">
-              Browse catalog
+            <Button variant="primary" size="sm" to="/signup" className="text-sm text-white/70 hover:text-neon transition-colors px-3 py-2 rounded-lg font-medium">
+              Sign Up
             </Button>
           </div>
 

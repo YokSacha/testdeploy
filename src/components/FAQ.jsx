@@ -40,11 +40,10 @@ function FAQItem({ faq, isOpen, onToggle }) {
           {faq.q}
         </span>
         <span
-          className={`flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300 ${
-            isOpen
+          className={`flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen
               ? 'border-neon bg-neon/10 rotate-45 text-neon'
               : 'border-dark-border text-white/40'
-          }`}
+            }`}
         >
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -53,9 +52,8 @@ function FAQItem({ faq, isOpen, onToggle }) {
       </button>
 
       <div
-        className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? 'max-h-60' : 'max-h-0'
-        }`}
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-60' : 'max-h-0'
+          }`}
       >
         <p className="px-6 pb-5 text-sm text-white/50 leading-relaxed">
           {faq.a}

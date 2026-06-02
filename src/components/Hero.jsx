@@ -13,7 +13,7 @@ const HERO_SHOES = [
   { name: "Adidas Adizero Adios Pro 3", price: "450", video: "/hero/2.webm" },
   { name: "Adidas Adizero Zero SL", price: "350", video: "/hero/3.webm" },
   { name: "Nike Vomero Plus", price: "420", video: "/hero/4.mp4" },
-  { name: "Nike Pegasus 42",  price: "290", video: "/hero/5.mp4" },
+  { name: "Nike Pegasus 42", price: "290", video: "/hero/5.mp4" },
 ];
 
 const N = HERO_SHOES.length;
@@ -55,7 +55,7 @@ export default function Hero() {
   const active = HERO_SHOES[current];
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       {/* Background grid */}
       <div
         className="absolute inset-0 bg-grid-dark bg-grid opacity-100 pointer-events-none"
@@ -187,9 +187,8 @@ export default function Hero() {
                       currentRef.current = i;
                       setTimeout(() => setOutgoing(null), 520);
                     }}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      i === current ? "w-6 bg-neon" : "w-1.5 bg-white/20"
-                    }`}
+                    className={`h-1 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-neon" : "w-1.5 bg-white/20"
+                      }`}
                   />
                 ))}
               </div>

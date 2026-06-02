@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Footer from "../components/Footer";
 import CatalogNavbar from "../components/catalog/CatalogNavbar";
 import CatalogHero from "../components/catalog/CatalogHero";
@@ -22,6 +23,10 @@ const PARTNERS = [
 ];
 
 export default function Catalog() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#080809] font-sora text-white">
       <CatalogNavbar />

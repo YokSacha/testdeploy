@@ -36,13 +36,13 @@ function Section01() {
 
                 <div className="mt-20 ml-15 mb-5">
                     <div>
-                        <span className="text-[#C3FF51] text-sm">———— แบรนด์พันธมิตร</span>
+                        <span className="text-[#C3FF51] text-sm">———— PARTNER BRANDS</span>
                     </div>
                 </div>
 
                 <div>
                     <div className="ml-15 text-white">
-                        <span className="text-5xl">เลือกแบรนด์ที่ใช่</span>
+                        <span className="text-5xl">Choose your brand</span>
                     </div>
                 </div>
 
@@ -52,32 +52,32 @@ function Section01() {
                         <div className="w-50 h-50 bg-[rgba(248,250,244,0.05)] text-white flex flex-col items-center justify-center gap-5">
                             <img src="./shoe logo/Nike.jpg" className="w-10 h-10 rounded-md" />
                             <span>Nike</span>
-                            <span>10 รุ่น</span>
+                            <span>10 Models</span>
                         </div>
                         <div className="w-50 h-50 bg-[rgba(248,250,244,0.05)] text-white flex flex-col items-center justify-center gap-5">
                             <img src="./shoe logo/Adidas.jpg" className="w-10 h-10 rounded-md" />
                             <span>Adidas</span>
-                            <span>10 รุ่น</span>
+                            <span>10 Models</span>
                         </div>
                         <div className="w-50 h-50 bg-[rgba(248,250,244,0.05)] text-white flex flex-col items-center justify-center gap-5">
                             <img src="./shoe logo/ASICS.jpg" className="w-10 h-10 rounded-md" />
                             <span>ASIC</span>
-                            <span>10 รุ่น</span>
+                            <span>10 Models</span>
                         </div>
                         <div className="w-50 h-50 bg-[rgba(248,250,244,0.05)] text-white flex flex-col items-center justify-center gap-5">
                             <img src="./shoe logo/Brooks.jpg" className="w-10 h-10 rounded-md" />
                             <span>brooks</span>
-                            <span>10 รุ่น</span>
+                            <span>10 Models</span>
                         </div>
                         <div className="w-50 h-50 bg-[rgba(248,250,244,0.05)] text-white flex flex-col items-center justify-center gap-5">
                             <img src="./shoe logo/Hoka.png" className="w-10 h-10 rounded-md" />
                             <span>Hoka</span>
-                            <span>10 รุ่น</span>
+                            <span>10 Models</span>
                         </div>
                         <div className="w-50 h-50 bg-[rgba(248,250,244,0.05)] text-white flex flex-col items-center justify-center gap-5">
                             <img src="./shoe logo/New Balance.jpg" className="w-10 h-10 rounded-md" />
                             <span>New Balance</span>
-                            <span>10 รุ่น</span>
+                            <span>10 Models</span>
                         </div>
                     </div>
                 </div>

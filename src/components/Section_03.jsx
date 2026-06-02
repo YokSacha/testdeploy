@@ -1,27 +1,27 @@
 const steps = [
   {
     number: "01",
-    title: "เลือกรองเท้า",
+    title: "Select Shoes",
     description:
-      "เลือกรุ่น แบรนด์ และไซส์ที่ต้องการจาก catalog ออนไลน์",
+      "Choose model, brand, and size from the online catalog",
   },
   {
     number: "02",
-    title: "จองวันที่",
+    title: "Book Dates",
     description:
-      "เลือกรับ-คืน ชำระเงินออนไลน์ปลอดภัย รับ confirmation ทันที",
+      "Choose pickup-return dates, pay securely online, receive instant confirmation",
   },
   {
     number: "03",
-    title: "รับรองเท้า",
+    title: "Receive Shoes",
     description:
-      "รับหน้าร้าน หรือเลือกจัดส่งถึงที่อยู่ภายใน 24 ชั่วโมง",
+      "Collect in store or choose delivery within 24 hours",
   },
   {
     number: "04",
-    title: "คืนรองเท้า",
+    title: "Return Shoes",
     description:
-      "คืนเมื่อหมดสัญญา ไม่ต้องทำความสะอาด เราดูแลให้ทั้งหมด",
+      "Return after contract ends, no cleaning needed - we handle it all",
   },
 ];
 
@@ -34,13 +34,13 @@ export default function Section_03() {
       <div className="mx-auto max-w-[1520px]">
         <header className="max-w-5xl">
           <p className="font-display text-[11px] font-semibold tracking-[0.38em] text-kinetix-lime sm:text-xs">
-            -------- ขั้นตอนง่ายๆ
+            -------- SIMPLE STEPS
           </p>
           <h2
             id="section-03-heading"
             className="mt-7 font-display text-[3.25rem] font-semibold leading-[0.92] tracking-[-0.075em] text-kinetix-white sm:text-[4.5rem] lg:text-[5.5rem]"
           >
-            เช่า ใน 4 ขั้นตอน
+            Rent in 4 Steps
           </h2>
         </header>
 
