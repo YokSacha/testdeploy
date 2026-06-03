@@ -17,6 +17,7 @@ import Footer from '../components/Footer';
 import Login from "../pages/Login";
 import SignupPage from "../components/SignupPage";
 import ScrollArrow from "../components/ScrollArrow";
+import UserDashboard from "../pages/UserDashboard"
 
 function HomeContent() {
   return (
@@ -49,6 +50,7 @@ export default function Home() {
           <Route path="login" element={<Login />} />
           <Route path="catalog" element={<Catalog />} />
           <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="userdashboard" element={<UserDashboard />} />
         </Routes>
       </main>
       <Footer />

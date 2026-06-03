@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+//import API from "../api/axios";
 
 const initialFormData = {
-
   firstName: "",
   lastName: "",
   email: "",
@@ -11,25 +10,25 @@ const initialFormData = {
   address: "",
   shoeSize: "",
 
-
   bankName: "",
   accountNumber: "",
   accountName: "",
 
-
   password: "",
   confirmPassword: "",
-
 
   agreeTerms: false,
   ageConfirm: false,
 };
+
 export default function SignupPage() {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [previewData, setPreviewData] = useState(null);
-
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -38,12 +37,10 @@ export default function SignupPage() {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-
 
   const validate = () => {
     const newErrors = {};
@@ -97,63 +94,91 @@ export default function SignupPage() {
     return newErrors;
   };
 
-
   const buildPayload = () => ({
-    personalInfo: {
-      firstName: formData.firstName.trim(),
-      lastName: formData.lastName.trim(),
-      fullName: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
-      email: formData.email.trim().toLowerCase(),
-      phone: formData.phone.trim(),
-      address: formData.address.trim(),
-      shoeSize: Number(formData.shoeSize),
-    },
+    name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+    email: formData.email.trim().toLowerCase(),
+    password: formData.password,
+    address: formData.address.trim(),
+    phone: formData.phone.trim(),
+    shoeSize: Number(formData.shoeSize),
     bankInfo: {
       bankName: formData.bankName.trim(),
       accountNumber: formData.accountNumber.trim(),
       accountName: formData.accountName.trim(),
     },
-    security: {
-      password: formData.password,
-    },
-    meta: {
-      agreedToTerms: formData.agreeTerms,
-      ageConfirmed: formData.ageConfirm,
-      registeredAt: new Date().toISOString(),
-      accountStatus: "active",
-      rejectCount: 0,
-    },
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError("");
 
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      // Scroll ขึ้นไปหา error แรก
       const firstErrorField = document.querySelector(".error-field");
       if (firstErrorField) firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
     const payload = buildPayload();
-    setPreviewData(payload);
-    setSubmitted(true);
+    setLoading(true);
 
-    // =========================================================
-    // ตรงนี้คือจุดที่จะส่งข้อมูลไป backend / database
-    // ตัวอย่างเช่น:
-    //
-    // const response = await fetch("/api/register", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
-    // const result = await response.json();
-    // =========================================================
+    try {
+      // Step 1: Register the user
+      const registerResponse = await API.post("/api/users/register", payload);
+      console.log("✅ Registration successful:", registerResponse.data);
 
-    console.log("✅ Payload ready to send to database:", JSON.stringify(payload, null, 2));
+      // Step 2: Auto-login with the same credentials
+      try {
+        const loginResponse = await API.post("/api/users/login", {
+          email: payload.email,
+          password: payload.password,
+        });
+        console.log("✅ Auto-login successful:", loginResponse.data);
+
+        // Step 3: Set success state and redirect to dashboard
+        setPreviewData({
+          ...payload,
+          userId: registerResponse.data?.data?._id || loginResponse.data?.user?._id,
+        });
+        setSubmitted(true);
+
+        setTimeout(() => {
+          navigate("/userdashboard");
+        }, 1500);
+
+      } catch (loginError) {
+        console.error("⚠️ Registration succeeded but auto-login failed:", loginError);
+        console.log("Login error response:", loginError.response?.data);
+
+        // Registration worked, but login failed
+        setApiError(
+          "Account created successfully! However, auto-login failed. Please go to the login page."
+        );
+        setSubmitted(true);
+        // Don't redirect — let user click the button to go to login
+      }
+
+    } catch (registerError) {
+      console.error("❌ Registration failed:");
+      console.log("Error object:", registerError);
+      console.log("Error response:", registerError.response);
+      console.log("Error response data:", registerError.response?.data);
+
+      const message =
+        registerError.response?.data?.message ||
+        registerError.response?.data?.error?.message ||
+        registerError.message ||
+        "Registration failed. Please try again.";
+
+      setApiError(message);
+
+      if (registerError.response?.data?.errors) {
+        setErrors(registerError.response.data.errors);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
@@ -161,14 +186,14 @@ export default function SignupPage() {
     setErrors({});
     setSubmitted(false);
     setPreviewData(null);
+    setApiError("");
+    setLoading(false);
   };
-
 
   const ErrorMsg = ({ field }) =>
     errors[field] ? (
       <p className="text-red-400 text-xs mt-1 ml-1">{errors[field]}</p>
     ) : null;
-
 
   const inputClass = (field) =>
     `w-full bg-black border rounded-xl px-4 py-3 focus:outline-none transition-colors ${errors[field]
@@ -199,33 +224,52 @@ export default function SignupPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
-              { title: "Profile Data", desc: "Store customer information including full name, email, phone number, address, and shoe size." },
-              { title: "Bank Information", desc: "Securely save bank name, account number, and account owner details for refund processing." },
-              { title: "Account Status", desc: "System tracks reject count, account status, suspended date, and account activity." },
-              { title: "Secure Access", desc: "Your account is protected with authentication and encrypted password management." },
+              {
+                title: "Profile Data",
+                desc: "Store customer information including full name, email, phone number, address, and shoe size.",
+              },
+              {
+                title: "Bank Information",
+                desc: "Securely save bank name, account number, and account owner details for refund processing.",
+              },
+              {
+                title: "Account Status",
+                desc: "System tracks reject count, account status, suspended date, and account activity.",
+              },
+              {
+                title: "Secure Access",
+                desc: "Your account is protected with authentication and encrypted password management.",
+              },
             ].map((card) => (
-              <div key={card.title} className="bg-zinc-950 border border-zinc-800 rounded-3xl p-6">
+              <div
+                key={card.title}
+                className="bg-zinc-950 border border-zinc-800 rounded-3xl p-6"
+              >
                 <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
 
-          {/* แสดง JSON Payload หลัง submit สำเร็จ */}
+          {/* Show success preview after registration */}
           {submitted && previewData && (
             <div className="bg-zinc-950 border border-lime-400/30 rounded-3xl p-6 space-y-3">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-lime-400 animate-pulse" />
                 <h3 className="text-lime-400 font-semibold text-sm uppercase tracking-wider">
-                  Data Ready — Payload Preview
+                  Registration Successful
                 </h3>
               </div>
               <p className="text-zinc-500 text-xs">
-                The data below is ready to be sent to the API / Database.
+                {apiError
+                  ? "Account created! Please login manually."
+                  : "Redirecting to your dashboard..."}
               </p>
-              <pre className="text-xs text-zinc-300 bg-black rounded-xl p-4 overflow-auto max-h-64 border border-zinc-800">
-                {JSON.stringify(previewData, null, 2)}
-              </pre>
+              {previewData.userId && (
+                <p className="text-zinc-500 text-xs">
+                  User ID: {previewData.userId}
+                </p>
+              )}
             </div>
           )}
         </div>
@@ -238,6 +282,13 @@ export default function SignupPage() {
                 <h2 className="text-4xl font-bold">Create Account</h2>
                 <p className="text-zinc-400 mt-3">Join the Kinetix ecosystem today</p>
               </div>
+
+              {/* API Error Message */}
+              {apiError && (
+                <div className="mb-6 bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
+                  {apiError}
+                </div>
+              )}
 
               <form className="space-y-5" onSubmit={handleSubmit} noValidate>
                 {/* Personal Information */}
@@ -423,14 +474,23 @@ export default function SignupPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-lime-400 text-black py-4 rounded-2xl font-bold hover:scale-[1.01] transition-transform mt-4"
+                  disabled={loading}
+                  className={`w-full py-4 rounded-2xl font-bold transition-all mt-4 ${loading
+                    ? "bg-zinc-700 text-zinc-400 cursor-not-allowed"
+                    : "bg-lime-400 text-black hover:scale-[1.01]"
+                    }`}
                 >
-                  + CREATE ACCOUNT
+                  {loading ? "CREATING ACCOUNT..." : "+ CREATE ACCOUNT"}
                 </button>
 
                 <p className="text-center text-zinc-500 text-sm pt-2">
                   Already have an account?{" "}
-                  <Link to="/login" className="text-white hover:text-lime-400 cursor-pointer" >Sign In</Link>
+                  <Link
+                    to="/login"
+                    className="text-white hover:text-lime-400 cursor-pointer"
+                  >
+                    Sign In
+                  </Link>
                 </p>
               </form>
             </>
@@ -438,35 +498,52 @@ export default function SignupPage() {
             /* Success State */
             <div className="flex flex-col items-center justify-center py-16 space-y-6 text-center">
               <div className="w-20 h-20 rounded-full bg-lime-400/10 border border-lime-400/30 flex items-center justify-center">
-                <svg className="w-10 h-10 text-lime-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="w-10 h-10 text-lime-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
               <div>
                 <h2 className="text-3xl font-bold">Account Created!</h2>
-                <p className="text-zinc-400 mt-2">
-                  Data saved and ready for the database.
-                </p>
+                {apiError ? (
+                  <p className="text-amber-400 mt-2 text-sm">{apiError}</p>
+                ) : (
+                  <p className="text-zinc-400 mt-2">
+                    Redirecting to your dashboard...
+                  </p>
+                )}
                 <p className="text-lime-400 font-medium mt-1">
-                  {previewData?.personalInfo?.fullName}
+                  {previewData?.name}
                 </p>
               </div>
-              <div className="w-full bg-black rounded-2xl p-4 border border-zinc-800 text-left space-y-2">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">ข้อมูลที่บันทึก</p>
-                {[
-                  ["Email", previewData?.personalInfo?.email],
-                  ["Phone", previewData?.personalInfo?.phone],
-                  ["Shoe Size", previewData?.personalInfo?.shoeSize],
-                  ["Bank", previewData?.bankInfo?.bankName],
-                  ["Account", previewData?.bankInfo?.accountNumber],
-                  ["Registered At", new Date(previewData?.meta?.registeredAt).toLocaleString("en-US")],
-                ].map(([label, value]) => (
-                  <div key={label} className="flex justify-between text-sm">
-                    <span className="text-zinc-500">{label}</span>
-                    <span className="text-white">{value}</span>
-                  </div>
-                ))}
-              </div>
+
+              {apiError ? (
+                /* Show Login button if auto-login failed */
+                <button
+                  onClick={() => navigate("/login")}
+                  className="w-full bg-lime-400 text-black py-3 rounded-2xl font-semibold hover:scale-[1.01] transition-transform"
+                >
+                  Go to Login
+                </button>
+              ) : (
+                /* Show Dashboard button on full success */
+                <button
+                  onClick={() => navigate("/userdashboard")}
+                  className="w-full bg-lime-400 text-black py-3 rounded-2xl font-semibold hover:scale-[1.01] transition-transform"
+                >
+                  Go to Dashboard
+                </button>
+              )}
+
               <button
                 onClick={handleReset}
                 className="w-full border border-zinc-700 text-zinc-300 py-3 rounded-2xl font-semibold hover:border-lime-400 hover:text-lime-400 transition-colors"
