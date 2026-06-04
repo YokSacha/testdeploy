@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {} from "react";
 import { Link } from "react-router-dom";
 
 const NAV_LINKS = [
@@ -11,7 +11,7 @@ const NAV_LINKS = [
 export default function CatalogNavbar() {
   return (
     <header className="sticky top-0 z-50 bg-[#080809]/95 backdrop-blur-md border-b border-[#1e1e20]">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div className="max-w-350 mx-auto px-4 sm:px-6">
         <div className="relative flex items-center h-14">
           <Link to="/" className="shrink-0">
             <span className="text-[24px] font-extrabold tracking-widest text-white">
@@ -27,7 +27,7 @@ export default function CatalogNavbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex flex-1 max-w-[280px] ml-2">
+          <div className="hidden lg:flex flex-1 max-w-70 ml-2">
             <div className="relative w-full">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/25" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />

@@ -1,5 +1,3 @@
-import React from 'react';
-
 
 export default function CartDrawer({ isOpen, onClose }) {
     return (
@@ -36,8 +34,8 @@ export default function CartDrawer({ isOpen, onClose }) {
 
                     <div className="flex gap-4">
 
-                        <div className="w-24 h-24 bg-zinc-800 rounded-lg flex-shrink-0"></div>
-                        <div className="flex-grow flex flex-col justify-between">
+                        <div className="w-24 h-24 bg-zinc-800 rounded-lg shrink-0"></div>
+                        <div className="grow flex flex-col justify-between">
                             <div>
                                 <h3 className="text-white font-bold">Nike Alphafly 3</h3>
                                 <p className="text-gray-400 text-xs">Size: US 10 | 3 Days Rental</p>
@@ -51,8 +49,8 @@ export default function CartDrawer({ isOpen, onClose }) {
 
 
                     <div className="flex gap-4">
-                        <div className="w-24 h-24 bg-zinc-800 rounded-lg flex-shrink-0"></div>
-                        <div className="flex-grow flex flex-col justify-between">
+                        <div className="w-24 h-24 bg-zinc-800 rounded-lg shrink-0"></div>
+                        <div className="grow flex flex-col justify-between">
                             <div>
                                 <h3 className="text-white font-bold">Asics Metaspeed Sky</h3>
                                 <p className="text-gray-400 text-xs">Size: US 9.5 | 5 Days Rental</p>
@@ -74,7 +72,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                         <input
                             type="text"
                             placeholder="Promo Code"
-                            className="bg-transparent text-white outline-none flex-grow px-2 text-sm"
+                            className="bg-transparent text-white outline-none grow px-2 text-sm"
                         />
                         <button className="bg-[#b4ff39] text-black font-bold text-xs px-4 py-2 rounded-lg hover:bg-[#9add2d] transition">
                             Apply

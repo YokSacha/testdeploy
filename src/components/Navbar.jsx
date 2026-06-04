@@ -61,14 +61,15 @@ export default function Navbar() {
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
 
+            <Button variant="primary" size="sm" to="/signup" className="text-sm text-white/70 hover:text-dark transition-colors px-3 py-2 rounded-lg font-medium">
+              Sign Up
+            </Button>
             <Button
+              size="sm"
               to="/login"
-              className="text-sm text-white/70 hover:text-neon transition-colors px-3 py-2 rounded-lg font-medium"
+              className="text-sm text-white/70 hover:text-dark transition-colors px-3 py-2 rounded-lg font-medium"
             >
               Log in
-            </Button>
-            <Button variant="primary" size="sm" to="/signup" className="text-sm text-white/70 hover:text-neon transition-colors px-3 py-2 rounded-lg font-medium">
-              Sign Up
             </Button>
           </div>
 

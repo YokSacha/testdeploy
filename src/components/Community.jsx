@@ -11,7 +11,7 @@ export default function Community() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <span className="text-neon text-xs font-semibold tracking-widest uppercase">Community</span>
-          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
             Runners sharing the experience
           </h2>
         </div>

@@ -130,7 +130,7 @@ const BADGE_COLORS = {
 
 function ShoeCard({ shoe }) {
   return (
-    <div className="group bg-dark-card border border-dark-border rounded-2xl overflow-hidden transition-all duration-300 card-glow hover:border-neon/20 flex flex-col">
+    <div className="group bg-dark-card border border-dark-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-neon/20 flex flex-col">
       <div className="relative bg-dark-elevated h-48 flex items-center justify-center overflow-hidden">
         {shoe.badge && (
           <span className={`absolute top-3 left-3 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10 ${BADGE_COLORS[shoe.badgeColor] ?? 'bg-white/20 text-white'}`}>

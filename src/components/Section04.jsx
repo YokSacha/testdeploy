@@ -24,7 +24,7 @@ export default function Section04() {
 
     return (
         <section className="bg-black text-white py-20 lg:py-32 px-6 lg:px-8">
-            <div className="mx-auto max-w-[1560px]">
+            <div className="mx-auto max-w-390">
                 <div className="mb-16">
                     <p className="text-[13px] font-semibold text-[#C3FF51] uppercase tracking-[0.35em] mb-4">
                         -------- RECOMMENDED
@@ -38,7 +38,7 @@ export default function Section04() {
                     {featuredProducts.map((product, index) => (
                         <div
                             key={index}
-                            className="rounded-[28px] border border-[#1f2937] bg-[#0b0c10] overflow-hidden hover:border-[#C3FF51] transition group"
+                            className="rounded-7 border border-[#1f2937] bg-[#0b0c10] overflow-hidden hover:border-[#C3FF51] transition group"
                         >
                             <div className="h-64 bg-gradient-to-br from-[#1f2937] to-[#090a0d] flex items-center justify-center text-7xl group-hover:scale-105 transition">
                                 👟

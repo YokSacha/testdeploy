@@ -104,7 +104,7 @@ export default function Pricing() {
               <ul className="flex flex-col gap-3">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
-                    <span className="flex-shrink-0 w-4 h-4 rounded-full bg-neon/15 flex items-center justify-center mt-0.5">
+                    <span className="shrink-0 w-4 h-4 rounded-full bg-neon/15 flex items-center justify-center mt-0.5">
                       <svg
                         className="w-2.5 h-2.5 text-neon"
                         fill="none"

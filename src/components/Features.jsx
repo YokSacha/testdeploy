@@ -77,7 +77,7 @@ export default function Features() {
           {FEATURES.map((f) => (
             <div
               key={f.title}
-              className="group bg-dark-card border border-dark-border rounded-2xl px-6 pt-6 pb-4 transition-all duration-300 card-glow hover:border-neon/20"
+              className="group bg-dark-card border border-dark-border rounded-2xl px-6 pt-6 pb-4 transition-all duration-300 hover:border-neon/20"
             >
               <div className="w-11 h-11 rounded-xl bg-neon/10 border border-neon/15 flex items-center justify-center text-neon mb-4 group-hover:bg-neon/15 transition-colors duration-200">
                 {f.icon}
