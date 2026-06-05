@@ -1,37 +1,57 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api/axios";
+import { useAuth } from "../context/AuthContext";
 import ActionButton from "../components/ActionButton";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();  // ← Get login function from context
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setError("");
+        setLoading(true);
 
         try {
+
+            /*
             const response = await API.post(
                 "/api/users/login",
                 { email, password },
                 { withCredentials: true }
             );
 
-            console.log("Login response:", response.data);
+
+
+
+
+            const response = await API.post("/api/users/login", {
+                email: email,
+                password: password
+            });
+
+            console.log("Login success:", response.data);
+
+            // Store user in context (and localStorage)
+            login(response.data.user);
+
+*/
+
+
             alert("Login Successfully!");
             navigate("/userdashboard");
 
         } catch (error) {
-            // Show ALL error details
-            console.log("Full error:", error);
-            console.log("Error response:", error.response);
-
-            const message = error.response?.data?.message
-                || error.message
-                || "Login Failed";
-
-            alert(message);
+            console.log("Login error:", error);
+            const message = error.response?.data?.message || "Login Failed";
+            setError(message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -39,9 +59,18 @@ function Login() {
         <div className="max-w-md mx-auto py-20 px-4">
             <div className="bg-[#12121a] p-8 rounded-2xl border border-gray-800 shadow-2xl">
                 <h2 className="text-4xl font-bold mb-6 text-center text-white">Login</h2>
+
+                {error && (
+                    <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-xl p-3 text-red-400 text-sm">
+                        {error}
+                    </div>
+                )}
+
                 <form className="space-y-4" onSubmit={handleLogin}>
                     <div>
-                        <label className="block text-left mt-5 text-sm text-gray-400 mb-1">Email Address</label>
+                        <label className="block text-left mt-5 text-sm text-gray-400 mb-1">
+                            Email Address
+                        </label>
                         <input
                             type="email"
                             value={email}
@@ -52,7 +81,9 @@ function Login() {
                         />
                     </div>
                     <div>
-                        <label className="block text-left text-sm text-gray-400 mb-1">Password</label>
+                        <label className="block text-left text-sm text-gray-400 mb-1">
+                            Password
+                        </label>
                         <input
                             type="password"
                             value={password}
@@ -62,12 +93,14 @@ function Login() {
                             placeholder="Enter your password"
                         />
                     </div>
-                    <ActionButton text="Sign In" />
+                    <ActionButton text={loading ? "Signing In..." : "Sign In"} disabled={loading} />
                 </form>
                 <div className="mt-6 flex flex-col items-center gap-2">
                     <p className="text-sm text-gray-400">
                         Don't have an account?{" "}
-                        <Link to="/signup" className="text-blue-500 cursor-pointer hover:underline">Sign up</Link>
+                        <Link to="/signup" className="text-blue-500 cursor-pointer hover:underline">
+                            Sign up
+                        </Link>
                     </p>
                     <Link to="/" className="text-gray-500 hover:text-white text-sm transition-all mt-2 underline">
                         Back to Home
