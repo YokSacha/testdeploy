@@ -18,6 +18,8 @@ import Login from "../pages/Login";
 import SignupPage from "../components/SignupPage";
 import ScrollArrow from "../components/ScrollArrow";
 import UserDashboard from "../pages/UserDashboard"
+//import CatalogNavbar from "../components/catalog/CatalogNavbar";
+import CheckOut from "./CheckOut";
 
 function HomeContent() {
   return (
@@ -51,6 +53,8 @@ export default function Home() {
           <Route path="catalog" element={<Catalog />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="userdashboard" element={<UserDashboard />} />
+          {/* <Route path="catalognavbar" element={<CatalogNavbar />} /> */}
+          <Route path="checkout" element={<CheckOut />} />
         </Routes>
       </main>
       <Footer />
