@@ -7,14 +7,10 @@ import { useCart } from "../context/CartContext";
 
 
 const NAV_LINKS = [
-  { label: "Catalog", to: "/catalog" },
-  { label: "How it works", to: "/howitworkspage" },
-  { label: "Community", to: "/userdashboard" },
-  { label: "Contact Us", to: "/contact" },
-  { id: "catalog", label: "Catalog", to: "/catalog" },
-  { id: "how", label: "How it works", to: "/howitworkspage" },
-  { id: "community", label: "Community", to: "/" },
-  { id: "contact", label: "Contact Us", to: "/contact" },
+  { id: "catalog",   label: "Catalog",      to: "/catalog"        },
+  { id: "how",       label: "How it works", to: "/howitworkspage" },
+  { id: "community", label: "Community",    to: "/userdashboard"  },
+  { id: "contact",   label: "Contact Us",   to: "/contact"        },
 ];
 
 export default function Navbar() {
@@ -189,8 +185,9 @@ function GuestActions() {
   return (
     <>
       <Button
+        variant="primary"
+        size="sm"
         to="/login"
-        className="text-sm text-white/70 hover:text-neon transition-colors px-3 py-2 rounded-lg font-medium"
       >
         Log in
       </Button>

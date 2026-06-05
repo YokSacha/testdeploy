@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "../context/AdminAuthContext";
 
@@ -16,8 +16,12 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { loginAdmin } = useAdminAuth();
+  const { loginAdmin, admin } = useAdminAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (admin) navigate("/admin");
+  }, [admin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +35,7 @@ export default function AdminLogin() {
           { name: MOCK_ADMIN.name, email: MOCK_ADMIN.email, role: MOCK_ADMIN.role, _id: MOCK_ADMIN._id },
           "mock-jwt-token"
         );
-        navigate("/admin");
+        // navigation handled by useEffect above
       } else {
         setError("Email หรือ Password ไม่ถูกต้อง");
       }

@@ -10,7 +10,7 @@ function Login() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { login } = useAuth();  // ← Get login function from context
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -18,36 +18,20 @@ function Login() {
         setLoading(true);
 
         try {
-
-            /*
-            const response = await API.post(
-                "/api/users/login",
-                { email, password },
-                { withCredentials: true }
-            );
-
-
-
-
-
             const response = await API.post("/api/users/login", {
-                email: email,
-                password: password
+                email,
+                password,
             });
 
-            console.log("Login success:", response.data);
+            const userData = response.data.user;
+            login(userData);
 
-            // Store user in context (and localStorage)
-            login(response.data.user);
-
-*/
-
-
-            alert("Login Successfully!");
-            navigate("/userdashboard");
-
+            if (userData.role === "ADMIN") {
+                navigate("/admin");
+            } else {
+                navigate("/userdashboard");
+            }
         } catch (error) {
-            console.log("Login error:", error);
             const message = error.response?.data?.message || "Login Failed";
             setError(message);
         } finally {
