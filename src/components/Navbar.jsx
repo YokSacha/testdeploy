@@ -198,7 +198,13 @@ function GuestActions() {
 function UserActions({ onOpenCart }) {
   return (
     <>
-
+      {/* Admin Button (temp — remove before production) */}
+      <Link
+        to="/admin/login"
+        className="text-xs text-neon border border-neon/30 px-3 py-1.5 rounded-lg hover:bg-neon/10 transition-colors font-medium"
+      >
+        Admin
+      </Link>
 
       {/* Cart Drawer */}
       <button
