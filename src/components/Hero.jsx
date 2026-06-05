@@ -62,7 +62,7 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-175 h-175 rounded-full pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(195,255,81,0.06) 0%, transparent 70%)",
@@ -70,7 +70,7 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none"
+        className="absolute bottom-0 right-0 w-100 h-100 rounded-full pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(0,229,255,0.04) 0%, transparent 70%)",
@@ -92,7 +92,7 @@ export default function Hero() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.08] tracking-tight">
               <span className="text-white">Rent.</span>{" "}
               <span className="text-white">Test.</span>{" "}
-              <span className="text-neon text-neon-glow">Run.</span>
+              <span className="text-neon">Run.</span>
               <br />
               <span className="text-white/40">Decide.</span>
             </h1>
@@ -141,7 +141,7 @@ export default function Hero() {
           {/* Right — deck carousel */}
           <div className="relative flex items-stretch justify-center lg:justify-end min-h-0">
             <div
-              className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full pointer-events-none top-1/2 -translate-y-1/2"
+              className="absolute w-80 h-80 lg:w-120 lg:h-120 rounded-full pointer-events-none top-1/2 -translate-y-1/2"
               style={{
                 background:
                   "radial-gradient(circle, rgba(195,255,81,0.12) 0%, transparent 65%)",

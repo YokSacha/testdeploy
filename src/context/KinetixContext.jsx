@@ -11,10 +11,11 @@ export const KinetixProvider = ({ children }) => {
     };
 
     return (
-        <KinetixContext.Provider value={{ user, addRental, rentals }}>
+        <KinetixContext.Provider value={{ user, setUser, addRental, rentals }}>
             {children}
         </KinetixContext.Provider>
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useKinetix = () => useContext(KinetixContext);

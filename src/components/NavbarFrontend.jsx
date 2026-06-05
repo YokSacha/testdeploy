@@ -1,4 +1,4 @@
-/*import React from 'react';
+/*
 import ActionButton from './ActionButton';
 
 export default function Navbar({ setPage, currentPage }) {

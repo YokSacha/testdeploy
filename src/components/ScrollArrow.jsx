@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
 
+const SECTIONS = [
+    "hero",
+    "features",
+    "how-it-works",
+    "showcase",
+    "reviews",
+    "pricing",
+    "community",
+    "ourstory",
+    "faq",
+    "cta",
+];
+
 export default function ScrollArrow() {
     const [activeSection, setActiveSection] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
 
-
-    const sections = [
-        "hero",
-        "features",
-        "how-it-works",
-        "showcase",
-        "reviews",
-        "pricing",
-        "community",
-        "ourstory",
-        "faq",
-        "cta",
-    ];
+    const sections = SECTIONS;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,7 +37,7 @@ export default function ScrollArrow() {
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [sections]);
 
     const scrollToSection = (index) => {
         const element = document.getElementById(sections[index]);

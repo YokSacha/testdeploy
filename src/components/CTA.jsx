@@ -28,7 +28,7 @@ export default function CTA() {
 
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
           Stop wondering.{" "}
-          <span className="text-neon text-neon-glow">Start running.</span>
+          <span className="text-neon">Start running.</span>
         </h2>
 
         <p className="text-white/50 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-10">
@@ -37,7 +37,7 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="primary" size="lg" href="#catalog">
+          <Button variant="primary" size="lg" to="/catalog">
             Browse the catalog
             <svg
               className="w-4 h-4"

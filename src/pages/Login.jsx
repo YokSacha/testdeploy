@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../api/axios";
 import ActionButton from "../components/ActionButton";
 
 function Login() {
@@ -12,12 +12,9 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post(
-                "http://localhost:5000/api/users/login",
-                {
-                    email: email,
-                    password: password
-                },
+            const response = await API.post(
+                "/api/users/login",
+                { email, password },
                 { withCredentials: true }
             );
 
