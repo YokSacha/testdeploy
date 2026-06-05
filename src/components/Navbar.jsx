@@ -4,6 +4,10 @@ import Button from "./ui/Button";
 import CartDrawer from "./CartDrawer";
 
 const NAV_LINKS = [
+  { label: "Catalog", to: "/catalog" },
+  { label: "How it works", to: "/howitworkspage" },
+  { label: "Community", to: "/userdashboard" },
+  { label: "Contact Us", to: "/contact" },
   { id: "catalog", label: "Catalog", to: "/catalog" },
   { id: "how", label: "How it works", to: "/howitworkspage" },
   { id: "community", label: "Community", to: "/" },
