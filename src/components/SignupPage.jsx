@@ -1,25 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";  // ← Already imported
 import API from "../api/axios";
 
-const initialFormData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  address: "",
-  shoeSize: "",
-
-  bankName: "",
-  accountNumber: "",
-  accountName: "",
-
-  password: "",
-  confirmPassword: "",
-
-  agreeTerms: false,
-  ageConfirm: false,
-};
+// ... (initialFormData stays the same)
 
 function ErrorMsg({ field, errors }) {
   return errors[field] ? (
@@ -35,79 +19,9 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();  // ← ADD THIS LINE
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.firstName.trim()) newErrors.firstName = "Please enter your first name";
-    if (!formData.lastName.trim()) newErrors.lastName = "Please enter your last name";
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Please enter your email";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Please enter your phone number";
-    } else if (!/^\d{9,15}$/.test(formData.phone.replace(/[-\s]/g, ""))) {
-      newErrors.phone = "Invalid phone number";
-    }
-
-    if (!formData.address.trim()) newErrors.address = "Please enter your address (at least city and street)";
-
-    if (!formData.shoeSize) {
-      newErrors.shoeSize = "Please enter your shoe size";
-    } else if (formData.shoeSize < 30 || formData.shoeSize > 60) {
-      newErrors.shoeSize = "Shoe size must be between 30 and 60";
-    }
-
-    if (!formData.bankName.trim()) newErrors.bankName = "Please enter bank name";
-    if (!formData.accountNumber.trim()) {
-      newErrors.accountNumber = "Please enter account number";
-    } else if (!/^\d{10,16}$/.test(formData.accountNumber.replace(/[-\s]/g, ""))) {
-      newErrors.accountNumber = "Account number must be 10-16 digits";
-    }
-    if (!formData.accountName.trim()) newErrors.accountName = "Please enter account name";
-
-    if (!formData.password) {
-      newErrors.password = "Please enter password";
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
-    }
-
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Please confirm your password";
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-    }
-
-    if (!formData.agreeTerms) newErrors.agreeTerms = "Please accept terms";
-    if (!formData.ageConfirm) newErrors.ageConfirm = "Please confirm your age";
-
-    return newErrors;
-  };
-
-
-  const buildPayload = () => ({
-    name: formData.firstName.trim(),
-    surname: formData.lastName.trim(),
-    email: formData.email.trim().toLowerCase(),
-    password: formData.password,
-    address: formData.address.trim(),
-  });
+  // ... (handleChange, validate, buildPayload stay the same)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,6 +50,9 @@ export default function SignupPage() {
           password: payload.password,
         });
         console.log("✅ Auto-login successful:", loginResponse.data);
+
+        // ✅ SAVE USER TO AUTH CONTEXT (This is the key change)
+        login(loginResponse.data.user);
 
         // Step 3: Set success state and redirect to dashboard
         setPreviewData({
@@ -174,7 +91,6 @@ export default function SignupPage() {
 
       let message = rawMessage;
 
-      // Normalize unhelpful server responses like the literal "error!"
       if (typeof message === "string" && message.trim().toLowerCase() === "error!") {
         if (registerError.response?.data?.errors) {
           const fieldErrors = registerError.response.data.errors;
@@ -198,6 +114,7 @@ export default function SignupPage() {
     }
   };
 
+  /* ด้านล่างคือไม่แน่ใจว่าตัวด้านล่างนี้จำเป็นไหม  ถ้าไม่จำเป็นก็ลบทิ้งได้เลยนะค่ะ */
   const handleReset = () => {
     setFormData(initialFormData);
     setErrors({});
@@ -568,4 +485,5 @@ export default function SignupPage() {
       </div>
     </div>
   );
+  // ... (rest of the component stays the same)
 }
