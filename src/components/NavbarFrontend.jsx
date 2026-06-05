@@ -1,3 +1,4 @@
+/*
 import ActionButton from './ActionButton';
 
 export default function Navbar({ setPage, currentPage }) {
@@ -42,3 +43,4 @@ export default function Navbar({ setPage, currentPage }) {
         </nav>
     );
 }
+    */

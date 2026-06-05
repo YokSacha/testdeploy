@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import Navbar from '../components/Navbar';
 
 // ─── API CONFIG ────────────────────────────────────────────────────────────────
 // 🔧 [CONFIG] เปลี่ยน URL ใน .env ให้ตรงกับ backend จริง
@@ -261,7 +262,7 @@ const SECTION_SCROLL_MARGIN = "scroll-mt-24";
 
 // ─── REUSABLE COMPONENTS ───────────────────────────────────────────────────────
 const StatCard = ({ title, value, detail, detailColor, iconColor }) => (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 flex-1 min-w-[200px]">
+    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 py-10 flex-1 min-w-[200px]">
         <div className="flex items-center justify-between gap-4">
             <div className="text-neutral-400 text-sm">{title}</div>
             {iconColor && <div className={`w-3 h-3 rounded-full ${iconColor}`} />}
@@ -552,6 +553,25 @@ const DashboardPage = () => {
 
     return (
         <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans flex flex-col antialiased pt-16 lg:pt-18">
+        
+            {/* Header 
+            <header className="border-b border-neutral-800 px-6 py-4 flex items-center justify-between sticky top-0 bg-neutral-950 z-50">
+                <div className="text-3xl font-extrabold text-lime-400 tracking-tighter">KINETIX</div>
+                <nav className="flex items-center gap-10 text-sm text-neutral-300">
+                    {['All Shoes', 'Brands', 'How to rent', 'Pricing'].map(item => (
+                        <a key={item} href="#" className="hover:text-lime-400 transition">{item}</a>
+                    ))}
+                </nav>
+                <div className="flex items-center gap-3">
+                    <button className="bg-lime-400 text-neutral-950 font-bold px-6 py-2 rounded-lg text-sm flex items-center gap-2">
+                        <span>Rent Now</span>
+                        <span>→</span>
+                    </button>
+                    <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-lg text-lime-400 border border-neutral-700">SN</div>
+                </div>
+            </header> */}
+
+            {/* Main Layout */}
             <div className="flex flex-1">
                 {/* ── SIDEBAR ──────────────────────────────────────────────────────────── */}
                 <aside className="w-72 border-r border-neutral-800 p-8 flex flex-col gap-10">

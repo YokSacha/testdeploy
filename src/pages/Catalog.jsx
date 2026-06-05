@@ -1,4 +1,132 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import API from "../api/axios";
+
+import Footer from "../components/Footer";
+import Navbar from '../components/Navbar';
+import CatalogHero from "../components/catalog/CatalogHero";
+import CatalogFilters from "../components/catalog/CatalogFilters";
+import ProductCard from "../components/catalog/ProductCard";
+
+const PARTNERS = [
+  "Nike",
+  "Adidas",
+  "Hoka",
+  "ASICS",
+  "New Balance",
+  "Saucony",
+  "On Running",
+  "Puma",
+  "Under Armour",
+  "Mizuno",
+];
+
+export default function Catalog() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const fetchProducts = async () => {
+      try {
+        const res = await API.get("/api/products");
+
+        console.log("Products response:", res.data);
+
+        if (res.data?.success) {
+          setProducts(res.data.data || []);
+        } else {
+          setApiError("Failed to load products");
+        }
+      } catch (err) {
+        console.error("Product fetch error:", err);
+        setApiError(
+          err.response?.data?.message ||
+          "Unable to load products."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#080809] font-sora text-white">
+      <Navbar />
+      <CatalogHero />
+      <CatalogFilters />
+
+      <main className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
+
+        {/* Error */}
+        {apiError && (
+          <div className="mb-6 bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-400">
+            {apiError}
+          </div>
+        )}
+
+        {/* Product Grid */}
+        {loading ? (
+          <div className="text-center py-20 text-zinc-400">
+            Loading products...
+          </div>
+        ) : products.length === 0 ? (
+          <div className="text-center py-20 text-zinc-500">
+            No products found.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
+            {products.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Promo Banners */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          {/* Keep your existing promo cards */}
+        </div>
+
+        {/* Partners */}
+        <div className="mb-10">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-[#1e1e20]" />
+            <h2 className="text-white text-xs font-bold tracking-[0.4em] uppercase">
+              PARTNERS
+            </h2>
+            <div className="flex-1 h-px bg-[#1e1e20]" />
+          </div>
+
+          <div className="overflow-hidden">
+            <div className="flex gap-4 animate-marquee w-max">
+              {[...PARTNERS, ...PARTNERS].map((item, index) => (
+                <div
+                  key={`${item}-${index}`}
+                  className="flex-shrink-0 w-[120px] h-[64px] border border-[#1e1e20] rounded-xl bg-[#0f0f10] flex items-center justify-center"
+                >
+                  <span className="text-white/30 text-[11px] font-semibold tracking-wider">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+{/*import { useEffect } from "react";
 import Footer from "../components/Footer";
 import CatalogNavbar from "../components/catalog/CatalogNavbar";
 import CatalogHero from "../components/catalog/CatalogHero";
@@ -34,14 +162,14 @@ export default function Catalog() {
       <CatalogFilters />
 
       <main className="max-w-[1400px] mx-auto px-4 sm:px-6 py-8">
-        {/* Product Grid */}
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
           {PRODUCTS.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        {/* Promo Banners */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
           <div className="relative bg-[#0f0f10] border border-[#1e1e20] rounded-2xl overflow-hidden p-6 flex flex-col justify-between min-h-[200px]">
             <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #111 0%, #0a0a0a 100%)" }} />
@@ -86,7 +214,6 @@ export default function Catalog() {
           </div>
         </div>
 
-        {/* Partners marquee */}
         <div className="mb-10">
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 h-px bg-[#1e1e20]" />
@@ -109,3 +236,4 @@ export default function Catalog() {
     </div>
   );
 }
+*/}
