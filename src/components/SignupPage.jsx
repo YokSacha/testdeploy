@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import API from "../api/axios";
+import API from "../api/axios";
 
 const initialFormData = {
   firstName: "",
@@ -60,7 +60,7 @@ export default function SignupPage() {
       newErrors.phone = "Invalid phone number";
     }
 
-    if (!formData.address.trim()) newErrors.address = "Please enter your address";
+    if (!formData.address.trim()) newErrors.address = "Please enter your address (at least city and street)";
 
     if (!formData.shoeSize) {
       newErrors.shoeSize = "Please enter your shoe size";
@@ -94,18 +94,13 @@ export default function SignupPage() {
     return newErrors;
   };
 
+
   const buildPayload = () => ({
-    name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+    name: formData.firstName.trim(),
+    surname: formData.lastName.trim(),
     email: formData.email.trim().toLowerCase(),
     password: formData.password,
     address: formData.address.trim(),
-    phone: formData.phone.trim(),
-    shoeSize: Number(formData.shoeSize),
-    bankInfo: {
-      bankName: formData.bankName.trim(),
-      accountNumber: formData.accountNumber.trim(),
-      accountName: formData.accountName.trim(),
-    },
   });
 
   const handleSubmit = async (e) => {
@@ -156,7 +151,6 @@ export default function SignupPage() {
           "Account created successfully! However, auto-login failed. Please go to the login page."
         );
         setSubmitted(true);
-        // Don't redirect — let user click the button to go to login
       }
 
     } catch (registerError) {
@@ -165,11 +159,28 @@ export default function SignupPage() {
       console.log("Error response:", registerError.response);
       console.log("Error response data:", registerError.response?.data);
 
-      const message =
+      const rawMessage =
         registerError.response?.data?.message ||
         registerError.response?.data?.error?.message ||
         registerError.message ||
+        registerError.response?.data ||
         "Registration failed. Please try again.";
+
+      let message = rawMessage;
+
+      // Normalize unhelpful server responses like the literal "error!"
+      if (typeof message === "string" && message.trim().toLowerCase() === "error!") {
+        if (registerError.response?.data?.errors) {
+          const fieldErrors = registerError.response.data.errors;
+          const joined = Object.values(fieldErrors)
+            .flat()
+            .map((v) => (typeof v === "string" ? v : JSON.stringify(v)))
+            .join(" ");
+          message = joined || "Registration failed. Please try again.";
+        } else {
+          message = "Registration failed. Please try again.";
+        }
+      }
 
       setApiError(message);
 
@@ -421,7 +432,7 @@ export default function SignupPage() {
                       <input
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Password (min 8 characters)"
                         value={formData.password}
                         onChange={handleChange}
                         className={inputClass("password")}
@@ -529,10 +540,10 @@ export default function SignupPage() {
               {apiError ? (
                 /* Show Login button if auto-login failed */
                 <button
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/userdashboard")}
                   className="w-full bg-lime-400 text-black py-3 rounded-2xl font-semibold hover:scale-[1.01] transition-transform"
                 >
-                  Go to Login
+                  Go to Dashboard
                 </button>
               ) : (
                 /* Show Dashboard button on full success */

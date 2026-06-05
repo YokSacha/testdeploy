@@ -1,4 +1,4 @@
-import { useState } from "react";
+{/*import { useState } from "react";
 
 export default function ProductCard({ product }) {
   const [wished, setWished] = useState(false);
@@ -41,6 +41,106 @@ export default function ProductCard({ product }) {
         </div>
         <button className="w-full mt-auto bg-[#C3FF51] text-[#080809] text-[10px] font-bold py-1.5 rounded-md hover:bg-[#d3ff70] active:scale-95 transition-all duration-200 flex items-center justify-center gap-1 tracking-wide">
           + ADD TO CART
+        </button>
+      </div>
+    </div>
+  );
+}
+*/}
+
+import { useState } from "react";
+
+export default function ProductCard({ product }) {
+  const [wished, setWished] = useState(false);
+
+  const image =
+    product?.variants?.[0]?.images ||
+    "/placeholder-shoe.png";
+
+  const rentalPrice =
+    product?.rentalPlan?.[0]?.["1day"] || 0;
+
+  const totalStock =
+    product?.variants?.reduce((sum, variant) => {
+      return (
+        sum +
+        (variant?.size?.reduce(
+          (s, size) => s + (size.stock || 0),
+          0
+        ) || 0)
+      );
+    }, 0) || 0;
+
+  return (
+    <div className="bg-[#0f0f10] border border-[#1e1e20] rounded-xl overflow-hidden group hover:border-[#C3FF51]/20 transition-all duration-300 flex flex-col">
+
+      {/* Image */}
+      <div
+        className="relative bg-[#141415] overflow-hidden"
+        style={{ aspectRatio: "1/1" }}
+      >
+        <button
+          onClick={() => setWished(!wished)}
+          className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center hover:scale-110 transition-transform"
+        >
+          <svg
+            className={`w-3 h-3 ${wished ? "text-red-400" : "text-white/40"
+              }`}
+            fill={wished ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+            />
+          </svg>
+        </button>
+
+        {image ? (
+          <img
+            src={image}
+            alt={product.modleName}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-zinc-500">
+            No Image
+          </div>
+        )}
+      </div>
+
+      {/* Info */}
+      <div className="p-3 flex flex-col gap-2 flex-1">
+
+        <div>
+          <p className="text-white/35 text-[9px] font-bold tracking-widest uppercase">
+            {product.category}
+          </p>
+
+          <p className="text-white text-sm font-semibold leading-snug mt-1">
+            {product.modleName}
+          </p>
+        </div>
+
+        <div className="text-zinc-400 text-xs">
+          Stock: {totalStock}
+        </div>
+
+        <div className="flex items-center justify-between">
+          <span className="text-white font-bold">
+            ฿{rentalPrice}
+          </span>
+
+          <span className="text-zinc-500 text-xs">
+            1 Day Rental
+          </span>
+        </div>
+
+        <button className="w-full mt-auto bg-[#C3FF51] text-[#080809] text-[10px] font-bold py-2 rounded-md hover:bg-[#d3ff70] active:scale-95 transition-all duration-200">
+          Add to Cart
         </button>
       </div>
     </div>
