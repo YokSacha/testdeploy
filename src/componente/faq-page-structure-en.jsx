@@ -239,4 +239,22 @@ export default function FAQPage() {
                             <div>FAQ</div>
                         </div>
                         <div>
-                            <div className="font-bold mb-1 text-white">Information</d
+                            <div className="font-bold mb-1 text-white">Information</div>
+                            <div>How to Use</div>
+                            <div>Terms & Conditions</div>
+                            <div>About Us</div>
+                        </div>
+                        <div>
+                            <div className="font-bold mb-1 text-white">Follow Us</div>
+                            <div>Instagram</div>
+                            <div>Facebook</div>
+                            <div>Line OA</div>
+                            <div>TikTok</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="text-[#CBD5E1] text-xs text-right mt-4">Privacy Policy / Terms of Service</div>
+            </footer>
+        </div>
+    );
+}
