@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { LanguageProvider } from "./context/LanguageProvider";
 import { AuthProvider } from "./context/AuthContext";
 import { AdminAuthProvider } from "./context/AdminAuthContext";
+import { CartProvider } from './context/CartContext.jsx';
 import './index.css';
 import App from './App.jsx';
 
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')).render(
       <LanguageProvider>
         <AuthProvider>
           <AdminAuthProvider>
-            <App />
+            <CartProvider>
+              <App />
+            </CartProvider>
           </AdminAuthProvider>
         </AuthProvider>
       </LanguageProvider>

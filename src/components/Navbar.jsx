@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Button from "./ui/Button";
 import CartDrawer from "./CartDrawer";
+import { useCart } from "../context/CartContext";
+
 
 const NAV_LINKS = [
+  { label: "Catalog", to: "/catalog" },
+  { label: "How it works", to: "/howitworkspage" },
+  { label: "Community", to: "/userdashboard" },
+  { label: "Contact Us", to: "/contact" },
   { id: "catalog", label: "Catalog", to: "/catalog" },
   { id: "how", label: "How it works", to: "/howitworkspage" },
   { id: "community", label: "Community", to: "/" },
@@ -17,9 +24,10 @@ export default function Navbar() {
 
   // TEMPORARY
   // Replace later with:
-  // const { user } = useAuth();
-  // const isLoggedIn = !!user;
-  const isLoggedIn = true;
+  const { user } = useAuth();
+  const { cartCount } = useCart();
+  const isLoggedIn = !!user;
+  //const isLoggedIn = true;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +76,10 @@ export default function Navbar() {
             {/* Desktop User Actions */}
             <div className="hidden md:flex items-center gap-3">
               {isLoggedIn ? (
-                <UserActions onOpenCart={() => setCartOpen(true)} />
+                <UserActions
+                  onOpenCart={() => setCartOpen(true)}
+                  cartCount={cartCount}
+                />
               ) : (
                 <GuestActions />
               )}
@@ -195,7 +206,7 @@ function GuestActions() {
   );
 }
 
-function UserActions({ onOpenCart }) {
+function UserActions({ onOpenCart, cartCount }) {
   return (
     <>
       {/* Admin Button (temp — remove before production) */}
@@ -206,7 +217,7 @@ function UserActions({ onOpenCart }) {
         Admin
       </Link>
 
-      {/* Cart Drawer */}
+      {/* Cart */}
       <button
         onClick={onOpenCart}
         className="relative w-8 h-8 flex items-center justify-center text-white/35 hover:text-[#C3FF51] transition-colors"
@@ -215,7 +226,11 @@ function UserActions({ onOpenCart }) {
         <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
         </svg>
-        <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#C3FF51] text-[#080809] text-[9px] font-bold rounded-full flex items-center justify-center">2</span>
+        {cartCount > 0 && (
+          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#C3FF51] text-[#080809] text-[9px] font-bold rounded-full flex items-center justify-center">
+            {cartCount}
+          </span>
+        )}
       </button>
 
       {/* Profile */}
