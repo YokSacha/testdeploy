@@ -5,7 +5,7 @@ import Button from "./ui/Button";
 const NAV_LINKS = [
   { label: "Catalog", to: "/catalog" },
   { label: "How it works", to: "/howitworkspage" },
-  { label: "Community", to: "/" },
+  { label: "Community", to: "/userdashboard" },
   { label: "Contact Us", to: "/contact" },
 ];
 
