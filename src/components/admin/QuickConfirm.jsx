@@ -56,6 +56,7 @@ export default function QuickConfirm() {
             Pending approval
           </p>
         </div>
+        <Button onClick={() => handlePending()}> Refresh </Button>
         {pending.length > 0 && (
           <span
             className="text-[11px] font-semibold font-sora px-2 py-0.5 rounded-md"
