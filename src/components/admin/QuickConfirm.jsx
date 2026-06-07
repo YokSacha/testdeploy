@@ -19,6 +19,22 @@ export default function QuickConfirm() {
 
   const remove = (jobId) => setPending((prev) => prev.filter((j) => j.id !== jobId));
 
+   async function handlePending() {
+    try {
+      const response = await API.get("/api/jobs", {
+        params: {
+          jobs: 5,
+        },
+      });
+      const data = response.data;
+      setPending(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      console.log("Request completed");
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
