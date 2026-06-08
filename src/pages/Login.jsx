@@ -18,13 +18,20 @@ function Login() {
         setLoading(true);
 
         try {
+
             const response = await API.post("/api/users/login", {
                 email,
                 password,
             });
 
-            const userData = response.data.user;
-            login(userData);
+            console.log("Login success:", response.data);
+
+            // Store user in context (and localStorage)
+            login(response.data.user);
+
+
+            alert("Login Successfully!");
+            navigate("/userdashboard");
 
             if (userData.role === "ADMIN") {
                 navigate("/admin");

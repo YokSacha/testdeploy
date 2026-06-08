@@ -23,6 +23,7 @@ export default function Navbar() {
   const { user } = useAuth();
   const { cartCount } = useCart();
   const isLoggedIn = !!user;
+  const isAdmin = user?.userRank === "admin" || user?.role === "admin";
   //const isLoggedIn = true;
 
   useEffect(() => {

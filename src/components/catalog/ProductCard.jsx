@@ -23,21 +23,20 @@ export default function ProductCard({ product }) {
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
-
     if (!defaultVariant || !defaultSize) {
       alert("Product out of stock");
       return;
     }
-
     setAdding(true);
-
-    const success = await addToCart({
+    await addToCart({
       item: product._id,
+      name: product.modelName,
+      image: defaultVariant.images?.[0] || "",
+      price: rentalPrice,
       skuColorCode: defaultVariant.skuColorCode,
       size: defaultSize.size,
-      quantity: 1
+      quantity: 1,
     });
-
     setAdding(false);
   };
 
