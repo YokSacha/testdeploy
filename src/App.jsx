@@ -1,22 +1,37 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Catalog from "./pages/Catalog";
+import Login from "./pages/Login";
+import UserDashboard from "./pages/UserDashboard";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import ContactPage from "./pages/ContactPage";
+import CheckOut from "./pages/CheckOut";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute";
+import SignupPage from "./components/SignupPage";
 
-import "./App.css";
-import ButtonMain from "./componente/ButtonMain";
-import LoginButton from "./componente/LoginButton";
-import Section01 from "./componente/Section01";
-import SignupPage from "./componente/SignupPage";
-import Secondbutton from "./componente/Secondbutton";
-import HeroButton from "./componente/HeroButton";
-import Section_03 from "./componente/Section_03";
-import FAQPage from "./componente/faq-page-structure.jsx";
-
-function App() {
-
-  return (
-  <>
-  <FAQPage />
-  </>
-  );
+export default function App() {
+    return (
+        <Routes>
+            <Route path="/"                element={<Home />} />
+            <Route path="/catalog"         element={<Catalog />} />
+            <Route path="/login"           element={<Login />} />
+            <Route path="/signup"          element={<SignupPage />} />
+            <Route path="/userdashboard"   element={<UserDashboard />} />
+            <Route path="/howitworkspage"  element={<HowItWorksPage />} />
+            <Route path="/contact"         element={<ContactPage />} />
+            <Route path="/checkout"        element={<CheckOut />} />
+            <Route path="/admin/login"     element={<AdminLogin />} />
+            <Route
+                path="/admin"
+                element={
+                    <ProtectedAdminRoute>
+                        <AdminDashboard />
+                    </ProtectedAdminRoute>
+                }
+            />
+            <Route path="*" element={<Home />} />
+        </Routes>
+    );
 }
-
-export default App;
-
