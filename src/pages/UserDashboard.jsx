@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar.jsx";
 import { Link } from "react-router-dom";
 
 const API_BASE =

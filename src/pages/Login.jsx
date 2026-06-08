@@ -20,8 +20,8 @@ function Login() {
         try {
 
             const response = await API.post("/api/users/login", {
-                email: email,
-                password: password
+                email,
+                password,
             });
 
             console.log("Login success:", response.data);
@@ -33,8 +33,12 @@ function Login() {
             alert("Login Successfully!");
             navigate("/userdashboard");
 
+            if (userData.role === "ADMIN") {
+                navigate("/admin");
+            } else {
+                navigate("/userdashboard");
+            }
         } catch (error) {
-            console.log("Login error:", error);
             const message = error.response?.data?.message || "Login Failed";
             setError(message);
         } finally {
