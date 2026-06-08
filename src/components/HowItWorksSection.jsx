@@ -15,7 +15,7 @@ export default function HowItWorks() {
 
         <div className="relative">
           <div
-            className="hidden lg:block absolute top-[28px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-neon/25 to-transparent"
+            className="hidden lg:block absolute top-/[28px/] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-neon/25 to-transparent"
             aria-hidden="true"
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

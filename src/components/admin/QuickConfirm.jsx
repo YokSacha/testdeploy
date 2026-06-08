@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import API from "../../api/axios.js";
+import Button from "../ui/Button.jsx";
 
 const MOCK_DRIVERS = [
   { id: "DRV-001", name: "สมชาย ขับดี" },
@@ -18,6 +20,22 @@ export default function QuickConfirm() {
   const [selectedDriver, setSelectedDriver] = useState({});
 
   const remove = (jobId) => setPending((prev) => prev.filter((j) => j.id !== jobId));
+
+   async function handlePending() {
+    try {
+      const response = await API.get("/api/jobs", {
+        params: {
+          jobs: 5,
+        },
+      });
+      const data = response.data;
+      setPending(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      console.log("Request completed");
+    }
+  }
 
   return (
     <motion.div
@@ -40,6 +58,7 @@ export default function QuickConfirm() {
             Pending approval
           </p>
         </div>
+        <Button onClick={() => handlePending()}> Refresh </Button>
         {pending.length > 0 && (
           <span
             className="text-[11px] font-semibold font-sora px-2 py-0.5 rounded-md"
