@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import API from "../../api/axios.js";
-import ButtonMain from "../ButtonMain.jsx";
+import Button from "../ui/Button.jsx";
 
 const MOCK_DRIVERS = [
   { id: "DRV-001", name: "สมชาย ขับดี" },
@@ -58,7 +58,7 @@ export default function QuickConfirm() {
             Pending approval
           </p>
         </div>
-        <ButtonMain onClick={() => handlePending()}> Refresh </ButtonMain>
+        <Button onClick={() => handlePending()}> Refresh </Button>
         {pending.length > 0 && (
           <span
             className="text-[11px] font-semibold font-sora px-2 py-0.5 rounded-md"
