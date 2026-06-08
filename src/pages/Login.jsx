@@ -10,7 +10,7 @@ function Login() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { login } = useAuth();  // ← Get login function from context
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -18,17 +18,6 @@ function Login() {
         setLoading(true);
 
         try {
-
-            /*
-            const response = await API.post(
-                "/api/users/login",
-                { email, password },
-                { withCredentials: true }
-            );
-
-
-
-
 
             const response = await API.post("/api/users/login", {
                 email: email,
@@ -39,8 +28,6 @@ function Login() {
 
             // Store user in context (and localStorage)
             login(response.data.user);
-
-*/
 
 
             alert("Login Successfully!");
