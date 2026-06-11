@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import React, { createContext, useContext, useState, useEffect } from "react";
+=======
+import { createContext, useContext, useState } from 'react';
+>>>>>>> dd6513017cd14769dbc41f58ffdb2ef8f2777899
 
 const KinetixContext = createContext();
 
 export const KinetixProvider = ({ children }) => {
+<<<<<<< HEAD
   const [user, setUser] = useState(null);
   const [rentals, setRentals] = useState([]);
   const [cart, setCart] = useState([]);
@@ -77,3 +82,21 @@ export const useKinetix = () => {
   }
   return context;
 };
+=======
+    const [user, setUser] = useState(null);
+    const [rentals, setRentals] = useState([]);
+
+    const addRental = (item) => {
+        setRentals(prev => [...prev, item]);
+    };
+
+    return (
+        <KinetixContext.Provider value={{ user, setUser, addRental, rentals }}>
+            {children}
+        </KinetixContext.Provider>
+    );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useKinetix = () => useContext(KinetixContext);
+>>>>>>> dd6513017cd14769dbc41f58ffdb2ef8f2777899

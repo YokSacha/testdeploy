@@ -1,4 +1,17 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Catalog from "./pages/Catalog";
+import Login from "./pages/Login";
+import UserDashboard from "./pages/UserDashboard";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import ContactPage from "./pages/ContactPage";
+import CheckOut from "./pages/CheckOut";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute";
+import SignupPage from "./components/SignupPage";
 
+<<<<<<< HEAD
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
@@ -95,4 +108,29 @@ const router = createBrowserRouter([
 export default function App() {
   return <RouterProvider router={router} />;
 
+=======
+export default function App() {
+    return (
+        <Routes>
+            <Route path="/"                element={<Home />} />
+            <Route path="/catalog"         element={<Catalog />} />
+            <Route path="/login"           element={<Login />} />
+            <Route path="/signup"          element={<SignupPage />} />
+            <Route path="/userdashboard"   element={<UserDashboard />} />
+            <Route path="/howitworkspage"  element={<HowItWorksPage />} />
+            <Route path="/contact"         element={<ContactPage />} />
+            <Route path="/checkout"        element={<CheckOut />} />
+            <Route path="/admin/login"     element={<AdminLogin />} />
+            <Route
+                path="/admin"
+                element={
+                    <ProtectedAdminRoute>
+                        <AdminDashboard />
+                    </ProtectedAdminRoute>
+                }
+            />
+            <Route path="*" element={<Home />} />
+        </Routes>
+    );
+>>>>>>> dd6513017cd14769dbc41f58ffdb2ef8f2777899
 }
