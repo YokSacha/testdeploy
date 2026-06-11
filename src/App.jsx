@@ -11,7 +11,7 @@ import CommunityPage from "./pages/CommunityPage.jsx";
 import ProtectedAdminRoute from "./components/admin/ProtectedAdminRoute.jsx";
 import ProtectedUserRoute from "./components/ProtectedUserRoute.jsx";
 import SignupPage from "./components/SignupPage.jsx";
-import OrderConfirmation from "./pages/OrderConfirmation.jsx";
+import OrderConfirmation from "./pages/Orderconfirmation.jsx";
 
 export default function App() {
     return (
